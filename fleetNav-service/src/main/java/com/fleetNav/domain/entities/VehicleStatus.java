@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -23,13 +25,11 @@ public class VehicleStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, length = 36)
-    private String id;
+    private UUID id;
+
     @Column(nullable = false, length = 200)
     private String observation;
+
     @Column(name = "driver_id", nullable = false, length = 36)
     private String driverId;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
-    private Vehicle vehicle;
-
 }

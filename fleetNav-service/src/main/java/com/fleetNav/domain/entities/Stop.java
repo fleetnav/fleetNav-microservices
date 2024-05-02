@@ -14,6 +14,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -23,13 +25,17 @@ public class Stop {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, length = 36)
-    private String id;
+    private UUID id;
+
     @Column(nullable = false, length = 45)
     private String name;
+
     @Column(nullable = false, length = 45)
     private String location;
+
     @Column(nullable = false, length = 45)
     private String time;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "route_id", referencedColumnName = "id")
     private Route route;

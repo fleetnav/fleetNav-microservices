@@ -4,7 +4,7 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/fleetnav
+    url: jdbc:postgresql://localhost:5433/fleetNav
     username: postgres
     password: postgres
   jpa:
@@ -13,4 +13,4 @@ spring:
     show-sql: true
 
 server:
-  port: 8081
+  port: 8090

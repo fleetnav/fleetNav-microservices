@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -22,13 +24,17 @@ public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, length = 36)
-    private String id;
+    private UUID id;
+
     @Column(nullable = false, length = 30)
     private String date;
+
     @Column(nullable = false, length = 200)
     private String observation;
+
     @Column(nullable = false, length = 30)
     private Double price;
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trip_id", referencedColumnName = "id")
     private Trip trip;

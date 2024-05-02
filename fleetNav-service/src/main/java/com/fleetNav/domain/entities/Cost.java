@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Entity
 @Getter
 @Setter
@@ -15,7 +17,7 @@ public class Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, length = 36)
-    private String id;
+    private UUID id;
     @Column(name = "number_toll", nullable = false)
     private Integer numberToll;
     @Column(name = "price_toll", nullable = false)
@@ -24,8 +26,5 @@ public class Cost {
     private Double priceGasoline;
     @Column(name = "total_price", nullable = false)
     private Double totalPrice;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "route_id", referencedColumnName = "id")
-    private Route route;
 
 }

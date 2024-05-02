@@ -2,6 +2,7 @@ package com.fleetNav.domain.entities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -26,7 +27,7 @@ public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(nullable = false, length = 36)
-    private String id;
+    private UUID id;
     @Column(nullable = false, length = 45)
     private String name;
     @Column(nullable = false, length = 45)
@@ -37,12 +38,9 @@ public class Route {
     private String averageTime;
     @Column(nullable = false, length = 10)
     private String mileage;
-    @OneToMany(mappedBy = "stop", cascade = CascadeType.ALL, orphanRemoval = true)
-
+    @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Stop> stop = new ArrayList<>();
-    @OneToOne()
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cost_id", referencedColumnName = "id")
-    private Cost cost;
-
-
+    private Cost costId;
 }
