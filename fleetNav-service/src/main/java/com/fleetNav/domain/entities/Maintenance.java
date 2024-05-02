@@ -16,7 +16,6 @@ import java.util.UUID;
 public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
     private UUID id;
 
     @Column(nullable = false, length = 30)
@@ -28,7 +27,7 @@ public class Maintenance {
     @Column(nullable = false, length = 36)
     private Double price;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
 }

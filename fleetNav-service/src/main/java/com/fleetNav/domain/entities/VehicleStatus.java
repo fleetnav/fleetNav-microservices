@@ -24,7 +24,6 @@ import java.util.UUID;
 public class VehicleStatus {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
     private UUID id;
 
     @Column(nullable = false, length = 200)

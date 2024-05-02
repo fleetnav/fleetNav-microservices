@@ -15,10 +15,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -28,11 +25,10 @@ import lombok.Setter;
 public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
     private UUID id;
 
     @Column(nullable = false, length = 36)
-    private String driver_id;
+    private UUID driver_id;
 
     @Column(name = "date_start", nullable = false, length = 30)
     private String dateStart;
@@ -40,19 +36,20 @@ public class Trip {
     @Column(name = "date_end", nullable = false, length = 30)
     private String dateEnd;
 
-    @Column(nullable = false, length = 36)
+    @Column(nullable = false)
     private Double cost;
 
-    @OneToMany(mappedBy = "trip", orphanRemoval = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Comment> comments = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "route_id")
     private Route route;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "vehicle_id")
     private Vehicle vehicle;
-
-
 }
+

@@ -20,7 +20,6 @@ import java.util.UUID;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
     private UUID id;
 
     @Column(name = "number_plate", length = 10, nullable = false)
@@ -37,21 +36,19 @@ public class Vehicle {
     private VehicleStatusEnum status;
 
     @Column(length = 45, nullable = false)
-    private String ownerId;
+    private UUID ownerId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "trip_id", referencedColumnName = "id")
-    private Trip trip;
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Trip> trip;
 
-    @OneToMany()
-    @JoinColumn(name = "maintenance_id", referencedColumnName = "id")
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Maintenance> maintenance;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "next_maintenance_id", referencedColumnName = "id")
     private NextMaintenance nextMaintenance;
 
-    @OneToOne()
+    @OneToOne
     @JoinColumn(name = "vehicle_status_id", referencedColumnName = "id")
     private VehicleStatus vehicleStatus;
 }

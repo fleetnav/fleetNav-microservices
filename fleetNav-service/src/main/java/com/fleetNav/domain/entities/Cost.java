@@ -16,14 +16,17 @@ import java.util.UUID;
 public class Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
     private UUID id;
+
     @Column(name = "number_toll", nullable = false)
     private Integer numberToll;
+
     @Column(name = "price_toll", nullable = false)
     private Double priceToll;
+
     @Column(name = "price_gasoline", nullable = false)
     private Double priceGasoline;
+
     @Column(name = "total_price", nullable = false)
     private Double totalPrice;
 

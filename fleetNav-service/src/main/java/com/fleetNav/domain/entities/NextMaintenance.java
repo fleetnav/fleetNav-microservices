@@ -24,12 +24,14 @@ import java.util.UUID;
 public class NextMaintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
     private UUID id;
+
     @Column(nullable = false, length = 30)
     private String date;
+
     @Column(nullable = false, length = 10)
     private String hour;
+
     @Column(nullable = false, length = 45)
     private String location;
 
