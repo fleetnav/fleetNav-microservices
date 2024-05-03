@@ -1,7 +1,5 @@
 package com.fleetNav.api.dto.request;
 
-import com.fleetNav.domain.entities.Route;
-
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
@@ -16,5 +14,4 @@ public class CostRequest {
     private Double priceToll;
     private Double priceGasoline;
     private Double totalPrice;
-    private Route route;
 }

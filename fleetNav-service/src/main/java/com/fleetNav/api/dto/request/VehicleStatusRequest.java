@@ -14,5 +14,4 @@ import lombok.Setter;
 public class VehicleStatusRequest {
     private String observation;
     private String driverId;
-    private Vehicle vehicle;
 }

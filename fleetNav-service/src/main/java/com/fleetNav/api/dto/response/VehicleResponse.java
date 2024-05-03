@@ -11,18 +11,19 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleResponse {
-    private String numberPlate;
-    private String model;
+    private UUID id;
     private String mileage;
+    private String model;
+    private String numberPlate;
+    private UUID ownerId;
     private String status;
     private NextMaintenance nextMaintenance;
     private VehicleStatus vehicleStatus;
-    private Trip trip;
-    private Maintenance maintenance;
-
 }

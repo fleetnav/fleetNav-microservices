@@ -17,7 +17,7 @@ public class TripRequest {
     private String dateStart;
     private String dateEnd;
     private Double cost;
-    private Route route;
-    private Vehicle vehicle;
+    private RouteRequest route;
+    private VehicleRequest vehicle;
     private String driver_id;
 }

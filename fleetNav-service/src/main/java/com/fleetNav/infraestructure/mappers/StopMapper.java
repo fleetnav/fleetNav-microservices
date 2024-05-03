@@ -10,9 +10,6 @@ import java.util.UUID;
 
 @Mapper(componentModel = "spring", uses = {StopMapper.class})
 public interface StopMapper {
-    default UUID mapStopToUUID(Stop stop) {
-        return stop != null ? stop.getId() : null;
-    }
 
     @Mapping(target = "id", ignore = true)
     Stop toStop(StopRequest stopRequest);

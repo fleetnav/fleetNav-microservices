@@ -1,5 +1,6 @@
 package com.fleetNav.domain.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,5 +38,6 @@ public class Stop {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "route_id", referencedColumnName = "id")
+    @JsonBackReference
     private Route route;
 }

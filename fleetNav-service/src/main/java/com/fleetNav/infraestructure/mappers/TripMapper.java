@@ -14,14 +14,10 @@ import java.util.UUID;
 
 @Mapper(componentModel = "spring", uses = {CommentMapper.class, RouteMapper.class, VehicleMapper.class})
 public interface TripMapper {
-    default UUID mapTripToUUID(Comment comment) {
-        return comment != null ? comment.getId() : null;
-    }
-
     @Mapping(target = "id", ignore = true)
-    Trip tripToComment(TripRequest tripRequest);
+    Trip toTrip(TripRequest tripRequest);
 
-    TripResponse tripTotripResponse(Trip trip);
+    TripResponse toTripResponse(Trip trip);
 
     void updateFromTripRequest(TripRequest tripRequest, @MappingTarget Trip trip);
 }
