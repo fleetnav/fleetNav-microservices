@@ -5,6 +5,7 @@ import com.fleetNav.api.dto.response.CostResponse;
 import com.fleetNav.domain.entities.Comment;
 import com.fleetNav.domain.entities.Cost;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ public interface CostMapper {
         return cost != null ? cost.getId() : null;
     }
 
+    @Mapping(target = "id", ignore = true)
     Cost toCost(CostRequest costRequest);
 
     CostResponse toCostResponse(Cost cost);
