@@ -1,11 +1,12 @@
 package com.fleetNav.domain.repositories;
 
-import com.fleetNav.domain.entities.Route;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.stereotype.Repository;
-
 import java.util.UUID;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.fleetNav.domain.entities.Route;
+
 @Repository
-public interface RouteRepository extends CrudRepository<Route, UUID> {
+public interface RouteRepository extends JpaRepository<Route, UUID> {
 }

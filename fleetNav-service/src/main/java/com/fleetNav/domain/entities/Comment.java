@@ -37,6 +37,4 @@ public class Comment {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "trip_id", referencedColumnName = "id")
     private Trip trip;
-
-
 }

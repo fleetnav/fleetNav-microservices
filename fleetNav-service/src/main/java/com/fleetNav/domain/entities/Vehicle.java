@@ -39,10 +39,10 @@ public class Vehicle {
     private UUID ownerId;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Trip> trip;
+    private List<Trip> trips;
 
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Maintenance> maintenance;
+    private List<Maintenance> maintenances;
 
     @OneToOne
     @JoinColumn(name = "next_maintenance_id", referencedColumnName = "id")

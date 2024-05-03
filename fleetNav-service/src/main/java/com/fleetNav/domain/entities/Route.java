@@ -44,7 +44,7 @@ public class Route {
     private String mileage;
 
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Stop> stop = new ArrayList<>();
+    private List<Stop> stops = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cost_id", referencedColumnName = "id")
