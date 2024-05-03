@@ -13,6 +13,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -22,18 +24,15 @@ import lombok.Setter;
 public class NextMaintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(nullable = false, length = 36)
-    private String id;
+    private UUID id;
+
     @Column(nullable = false, length = 30)
     private String date;
+
     @Column(nullable = false, length = 10)
     private String hour;
+
     @Column(nullable = false, length = 45)
     private String location;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
-
-    private Vehicle vehicle;
 
 }
