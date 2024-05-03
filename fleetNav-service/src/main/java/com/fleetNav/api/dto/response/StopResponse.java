@@ -2,15 +2,18 @@ package com.fleetNav.api.dto.response;
 
 import com.fleetNav.domain.entities.Route;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
-@AllArgsConstructor
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 public class StopResponse {
-  private String name;
-  private String location;
-  private String time;
-  private Route route;
+    private String name;
+    private String location;
+    private String time;
+    private Route route;
 }

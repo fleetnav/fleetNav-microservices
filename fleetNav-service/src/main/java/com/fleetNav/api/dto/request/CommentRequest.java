@@ -1,17 +1,19 @@
 package com.fleetNav.api.dto.request;
 
-import com.fleetNav.domain.entities.Trip;
+import java.util.UUID;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentRequest {
-  private String date;
-  private String observation;
-  private Double price;
-  private Trip trip;
+    private String date;
+    private String observation;
+    private Double price;
+    private UUID tripId;
 }

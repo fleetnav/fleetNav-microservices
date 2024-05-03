@@ -7,13 +7,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
-import java.util.UUID;
-
 @Mapper(componentModel = "spring", uses = {TripMapper.class})
 public interface CommentMapper {
-    default UUID mapCommentToUUID(Comment comment) {
-        return comment != null ? comment.getId() : null;
-    }
 
     @Mapping(target = "id", ignore = true)
     Comment toComment(CommentRequest commentRequest);

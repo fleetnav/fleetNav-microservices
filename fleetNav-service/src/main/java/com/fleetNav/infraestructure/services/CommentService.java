@@ -3,7 +3,9 @@ package com.fleetNav.infraestructure.services;
 import com.fleetNav.api.dto.request.CommentRequest;
 import com.fleetNav.api.dto.response.CommentResponse;
 import com.fleetNav.domain.entities.Comment;
+import com.fleetNav.domain.entities.Trip;
 import com.fleetNav.domain.repositories.CommentRepository;
+import com.fleetNav.domain.repositories.TripRepository;
 import com.fleetNav.infraestructure.abstract_services.ICommentService;
 import com.fleetNav.infraestructure.mappers.CommentMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +23,17 @@ public class CommentService implements ICommentService {
 
     @Autowired
     private CommentRepository commentRepository;
+
+    @Autowired
+    private TripRepository tripRepository;
     @Autowired
     private CommentMapper commentMapper;
 
     @Override
     public CommentResponse create(CommentRequest commentRequest) {
         Comment comment = commentMapper.toComment(commentRequest);
+        Trip trip =  tripRepository.findById(commentRequest.getTripId()).orElseThrow();
+        comment.setTrip(trip);
         Comment saveComment = commentRepository.save(comment);
         return commentMapper.toCommentResponse(saveComment);
     }
