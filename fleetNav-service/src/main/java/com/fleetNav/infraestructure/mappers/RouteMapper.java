@@ -14,9 +14,10 @@ public interface RouteMapper {
         return route != null ? route.getId() : null;
     }
 
+    @Mapping(target = "id", ignore = true)
     Route toRoute(RouteRequest routeRequest);
 
-    @Mapping(source = "stops",target = "stop")
+    @Mapping(source = "stops", target = "stop")
     RouteResponse toRouteResponse(Route route);
 
 }

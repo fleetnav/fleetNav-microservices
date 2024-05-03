@@ -5,6 +5,7 @@ import com.fleetNav.api.dto.response.MaintenanceResponse;
 import com.fleetNav.domain.entities.Comment;
 import com.fleetNav.domain.entities.Maintenance;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 import java.util.UUID;
 
@@ -14,6 +15,7 @@ public interface MaintenanceMapper {
         return maintenance != null ? maintenance.getId() : null;
     }
 
+    @Mapping(target = "id", ignore = true)
     Maintenance toMaintenance(MaintenanceRequest maintenanceRequest);
 
     MaintenanceResponse toMaintenanceResponse(Maintenance maintenance);
