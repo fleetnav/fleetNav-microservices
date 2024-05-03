@@ -1,17 +1,22 @@
 package com.fleetNav.api.dto.response;
 
-import com.fleetNav.domain.entities.Trip;
+import java.util.UUID;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor 
+@AllArgsConstructor
 public class CommentResponse {
-  private String date;
-  private String observation;
-  private Double price;
-   private Trip trip;
+    private UUID id;
+    private String date;
+    private String observation;
+    private Double price;
 }
+/*
+ * Is not necessary show trip id, because if you're watching this comment is because you had already filtered
+ */

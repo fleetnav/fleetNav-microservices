@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -41,5 +42,8 @@ public class CommentController {
         return ResponseEntity.ok(commentService.getAll(pageable));
     }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity<Optional<CommentResponse>> getComment(@PathVariable UUID id) {
+        return ResponseEntity.ok(commentService.getById(id));
+    }
 }

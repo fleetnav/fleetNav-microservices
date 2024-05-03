@@ -10,10 +10,6 @@ import java.util.UUID;
 
 @Mapper(componentModel = "spring", uses = {RouteMapper.class})
 public interface RouteMapper {
-    default UUID mapRouteToUUID(Route route) {
-        return route != null ? route.getId() : null;
-    }
-
     @Mapping(target = "id", ignore = true)
     Route toRoute(RouteRequest routeRequest);
 

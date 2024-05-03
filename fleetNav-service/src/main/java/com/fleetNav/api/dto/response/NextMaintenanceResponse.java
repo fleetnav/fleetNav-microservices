@@ -2,16 +2,18 @@ package com.fleetNav.api.dto.response;
 
 import com.fleetNav.domain.entities.Vehicle;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class NextMaintenanceResponse {
-   private String date;
-  private String hour;
-  private String location;
-   private Vehicle vehicle;
+    private String date;
+    private String hour;
+    private String location;
+    private Vehicle vehicle;
 }

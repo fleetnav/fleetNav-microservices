@@ -2,14 +2,17 @@ package com.fleetNav.api.dto.response;
 
 import com.fleetNav.domain.entities.Vehicle;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-@Data
+import lombok.Getter;
+import lombok.AllArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleStatusResponse {
-  private String observation;
-  private String driverId;
-  private Vehicle vehicle;
+    private String observation;
+    private String driverId;
+    private Vehicle vehicle;
 }
