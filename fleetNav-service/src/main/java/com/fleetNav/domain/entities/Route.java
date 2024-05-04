@@ -21,7 +21,6 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Route {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

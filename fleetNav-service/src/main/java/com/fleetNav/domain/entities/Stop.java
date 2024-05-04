@@ -19,7 +19,6 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Stop {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
