@@ -18,6 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TripResponse {
     private UUID id;
+    private UUID driverId;
     private String dateStart;
     private String dateEnd;
     private Double cost;
