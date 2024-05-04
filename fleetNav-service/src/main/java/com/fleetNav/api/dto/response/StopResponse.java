@@ -1,7 +1,5 @@
 package com.fleetNav.api.dto.response;
 
-import com.fleetNav.domain.entities.Route;
-
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
