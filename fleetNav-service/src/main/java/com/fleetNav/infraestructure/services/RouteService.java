@@ -58,13 +58,14 @@ public class RouteService implements IRouteService {
 
     @Override
     public Page<RouteResponse> getAll(Pageable pageable) {
-        Page<Route> RoutePage = routeRepository.findAll(pageable);
-        return RoutePage.map(routeMapper::toRouteResponse);
+        Page<Route> routePage = routeRepository.findAll(pageable);
+        return routePage.map(routeMapper::toRouteResponse);
     }
 
     @Override
     public Optional<RouteResponse> getById(UUID uuid) {
-        Optional<Route> Route = routeRepository.findById(uuid);
-        return Route.map(routeMapper::toRouteResponse);
+        Optional<Route> route = routeRepository.findById(uuid);
+        if (route.isEmpty()) throw new IdNotFoundException("ROUTE", uuid);
+        return route.map(routeMapper::toRouteResponse);
     }
 }

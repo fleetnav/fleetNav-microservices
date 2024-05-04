@@ -63,6 +63,7 @@ public class CommentService implements ICommentService {
     @Override
     public Optional<CommentResponse> getById(UUID uuid) {
         Optional<Comment> comment = commentRepository.findById(uuid);
+        if (comment.isEmpty()) throw new IdNotFoundException("COMMENT", uuid);
         return comment.map(commentMapper::toCommentResponse);
     }
 }

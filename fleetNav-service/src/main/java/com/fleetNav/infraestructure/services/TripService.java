@@ -69,6 +69,7 @@ public class TripService implements ITripService {
     @Override
     public Optional<TripResponse> getById(UUID uuid) {
         Optional<Trip> trip = tripRepository.findById(uuid);
+        if (trip.isEmpty()) throw new IdNotFoundException("TRIP", uuid);
         return trip.map(tripMapper::toTripResponse);
     }
 }

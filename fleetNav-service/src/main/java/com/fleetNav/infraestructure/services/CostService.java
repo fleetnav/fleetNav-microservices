@@ -53,6 +53,7 @@ public class CostService implements ICostService {
     @Override
     public Optional<CostResponse> getById(UUID uuid) {
         Optional<Cost> cost = costRepository.findById(uuid);
+        if (cost.isEmpty()) throw new IdNotFoundException("COST", uuid);
         return cost.map(costMapper::toCostResponse);
     }
 }

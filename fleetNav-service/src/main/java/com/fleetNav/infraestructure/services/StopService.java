@@ -63,6 +63,7 @@ public class StopService implements IStopService {
     @Override
     public Optional<StopResponse> getById(UUID uuid) {
         Optional<Stop> stop = stopRepository.findById(uuid);
+        if (stop.isEmpty()) throw new IdNotFoundException("STOP", uuid);
         return stop.map(stopMapper::toStopResponse);
     }
 }

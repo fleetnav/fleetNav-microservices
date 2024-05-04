@@ -78,6 +78,7 @@ public class VehicleService implements IVehicleService {
     @Override
     public Optional<VehicleResponse> getById(UUID uuid) {
         Optional<Vehicle> vehicle = vehicleRepository.findById(uuid);
+        if (vehicle.isEmpty()) throw new IdNotFoundException("VEHICLE", uuid);
         return vehicle.map(vehicleMapper::toVehicleResponse);
     }
 }

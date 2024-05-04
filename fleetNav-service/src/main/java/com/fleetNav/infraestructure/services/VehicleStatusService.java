@@ -53,6 +53,7 @@ public class VehicleStatusService implements IVehicleStatusService {
     @Override
     public Optional<VehicleStatusResponse> getById(UUID uuid) {
         Optional<VehicleStatus> vehicleStatus = vehicleStatusRepository.findById(uuid);
+        if (vehicleStatus.isEmpty()) throw new IdNotFoundException("VEHICLE_STATUS", uuid);
         return vehicleStatus.map(vehicleStatusMapper::toVehicleStatusResponse);
     }
 }

@@ -14,16 +14,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestControllerAdvice
-@ResponseStatus(code = HttpStatus.BAD_REQUEST)
-public class BadRequestController {
+@ResponseStatus(code = HttpStatus.NOT_FOUND)
+public class NotFoundController {
 
     @ExceptionHandler(IdNotFoundException.class)
     public BaseErrorResponse handleIdNotFound(IdNotFoundException exception) {
 
         return ErrorResponse.builder()
                 .message(exception.getMessage())
-                .status(HttpStatus.BAD_REQUEST.name())
-                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.NOT_FOUND.name())
+                .code(HttpStatus.NOT_FOUND.value())
+                .build();
+    }
+
+    @ExceptionHandler(Exception.class)
+    public BaseErrorResponse handleInternalServerError(Exception exception) {
+        return ErrorResponse.builder()
+                .message("You probably have the wrong json format or values, or the specified url does not exist.")
+                .status(HttpStatus.NOT_FOUND.name())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
 
@@ -35,8 +44,8 @@ public class BadRequestController {
 
         return ErrorsResponse.builder()
                 .errors(errors)
-                .status(HttpStatus.BAD_REQUEST.name())
-                .code(HttpStatus.BAD_REQUEST.value())
+                .status(HttpStatus.NOT_FOUND.name())
+                .code(HttpStatus.NOT_FOUND.value())
                 .build();
     }
 }

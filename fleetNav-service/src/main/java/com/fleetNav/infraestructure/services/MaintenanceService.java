@@ -61,6 +61,7 @@ public class MaintenanceService implements IMaintenanceService {
     @Override
     public Optional<MaintenanceResponse> getById(UUID uuid) {
         Optional<Maintenance> maintenance = maintenanceRepository.findById(uuid);
+        if (maintenance.isEmpty()) throw new IdNotFoundException("MAINTENANCE", uuid);
         return maintenance.map(maintenanceMapper::toMaintenanceResponse);
     }
 }

@@ -53,6 +53,7 @@ public class NextMaintenanceService implements INextMaintenanceService {
     @Override
     public Optional<NextMaintenanceResponse> getById(UUID uuid) {
         Optional<NextMaintenance> nextMaintenance = nextMaintenanceRepository.findById(uuid);
+        if (nextMaintenance.isEmpty()) throw new IdNotFoundException("NEXT_MAINTENANCE", uuid);
         return nextMaintenance.map(nextMaintenanceMapper::toNextMaintenanceResponse);
     }
 
