@@ -21,7 +21,7 @@ public class TripResponse {
     private String dateStart;
     private String dateEnd;
     private Double cost;
-    private List<Comment> comment;
+    private List<CommentResponse> comments;
     private RouteResponse route;
     private VehicleResponse vehicle;
 }

@@ -4,20 +4,20 @@ package com.fleetNav.api.dto.request;
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.entities.Vehicle;
 
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
+import java.util.UUID;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class TripRequest {
     private String dateStart;
     private String dateEnd;
     private Double cost;
-    private RouteRequest route;
-    private VehicleRequest vehicle;
-    private String driver_id;
+    private UUID routeId;
+    private UUID vehicleId;
+    private UUID driverId;
 }

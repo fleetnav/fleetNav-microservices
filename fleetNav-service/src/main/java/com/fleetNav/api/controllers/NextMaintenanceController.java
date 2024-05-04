@@ -18,22 +18,22 @@ import java.util.UUID;
 public class NextMaintenanceController {
     @Autowired
     private NextMaintenanceService nextMaintenanceService;
-
-    @PostMapping
+    // We don't need http request, because this action is called for vehicle
+    /*@PostMapping
     public ResponseEntity<NextMaintenanceResponse> saveNextMaintenance(@RequestBody NextMaintenanceRequest nextMaintenanceRequest) {
         return ResponseEntity.ok(nextMaintenanceService.create(nextMaintenanceRequest));
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<NextMaintenanceResponse> updateNextMaintenance(@PathVariable UUID id, @RequestBody NextMaintenanceRequest nextMaintenanceRequest) {
         return ResponseEntity.ok(nextMaintenanceService.update(id, nextMaintenanceRequest));
     }
-
-    @DeleteMapping("/{id}")
+    // Just exist one way to delete the next maintenance, and this is deleting the vehicle
+    /*@DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteNextMaintenance(@PathVariable UUID id) {
         nextMaintenanceService.delete(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
     @GetMapping
     public ResponseEntity<Page<NextMaintenanceResponse>> getAllNextMaintenances(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {

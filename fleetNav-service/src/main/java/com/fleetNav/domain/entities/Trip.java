@@ -20,6 +20,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
 public class Trip {
@@ -27,8 +28,8 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(nullable = false, length = 36)
-    private UUID driver_id;
+    @Column(name = "driver_id",nullable = false, length = 36)
+    private UUID driverId;
 
     @Column(name = "date_start", nullable = false, length = 30)
     private String dateStart;

@@ -18,22 +18,22 @@ import java.util.UUID;
 public class VehicleStatusController {
     @Autowired
     private VehicleStatusService vehicleStatusService;
-
-    @PostMapping
+    // We don't need http request, because this action is called for vehicle
+    /*@PostMapping
     public ResponseEntity<VehicleStatusResponse> saveVehicleStatus(@RequestBody VehicleStatusRequest vehicleStatusRequest) {
         return ResponseEntity.ok(vehicleStatusService.create(vehicleStatusRequest));
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<VehicleStatusResponse> updateVehicleStatus(@PathVariable UUID id, @RequestBody VehicleStatusRequest vehicleStatusRequest) {
         return ResponseEntity.ok(vehicleStatusService.update(id, vehicleStatusRequest));
     }
-
-    @DeleteMapping("/{id}")
+    //for delete a vehicle status is required delete the car first
+    /*@DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVehicleStatus(@PathVariable UUID id) {
         vehicleStatusService.delete(id);
         return ResponseEntity.noContent().build();
-    }
+    }*/
 
     @GetMapping
     public ResponseEntity<Page<VehicleStatusResponse>> getAllVehicleStatus(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {

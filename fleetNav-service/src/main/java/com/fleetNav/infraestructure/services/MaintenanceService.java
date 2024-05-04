@@ -21,14 +21,14 @@ public class MaintenanceService implements IMaintenanceService {
     @Autowired
     private MaintenanceRepository maintenanceRepository;
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private  VehicleRepository vehicleRepository;
     @Autowired
     private MaintenanceMapper maintenanceMapper;
 
     @Override
     public MaintenanceResponse create(MaintenanceRequest maintenanceRequest) {
+        Vehicle vehicle = vehicleRepository.findById(maintenanceRequest.getVehicleId()).orElseThrow();
         Maintenance maintenance = maintenanceMapper.toMaintenance(maintenanceRequest);
-        Vehicle vehicle = vehicleRepository.findById(maintenanceRequest.getVehicle().getId()).orElseThrow();
         maintenance.setVehicle(vehicle);
         Maintenance saveMaintenance = maintenanceRepository.save(maintenance);
         return maintenanceMapper.toMaintenanceResponse(saveMaintenance);

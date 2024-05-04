@@ -38,6 +38,5 @@ public class Stop {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "route_id", referencedColumnName = "id")
-    @JsonBackReference
     private Route route;
 }

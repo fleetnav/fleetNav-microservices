@@ -1,11 +1,11 @@
 package com.fleetNav.api.dto.request;
 
-import com.fleetNav.domain.entities.Vehicle;
-
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -13,5 +13,5 @@ import lombok.Setter;
 @AllArgsConstructor
 public class VehicleStatusRequest {
     private String observation;
-    private String driverId;
+    private UUID driverId;
 }

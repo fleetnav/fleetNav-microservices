@@ -31,24 +31,20 @@ public class TripService implements ITripService {
     @Autowired
     private VehicleRepository vehicleRepository;
     @Autowired
-    private RouteService routeService;
-    @Autowired VehicleService vehicleService;
-    @Autowired
     private TripMapper tripMapper;
 
     @Override
     public TripResponse create(TripRequest tripRequest) {
+        System.out.println(tripRequest.toString());
         Trip trip = tripMapper.toTrip(tripRequest);
+        System.out.println(trip.toString());
 
-        RouteResponse routeResponse = routeService.create(tripRequest.getRoute());
-        VehicleResponse vehicleResponse = vehicleService.create(tripRequest.getVehicle());
-
-        Route route = routeRepository.findById(routeResponse.getId()).orElseThrow();
-        Vehicle vehicle = vehicleRepository.findById(vehicleResponse.getId()).orElseThrow();
-
+        Route route = routeRepository.findById(tripRequest.getRouteId()).orElseThrow();
+        Vehicle vehicle = vehicleRepository.findById(tripRequest.getVehicleId()).orElseThrow();
+        System.out.println(trip.toString());
         trip.setRoute(route);
         trip.setVehicle(vehicle);
-
+        System.out.println(trip.toString());
         Trip saveTrip = tripRepository.save(trip);
         return tripMapper.toTripResponse(saveTrip);
     }
