@@ -1,10 +1,5 @@
 package com.fleetNav.api.dto.request;
 
-import java.util.List;
-
-import com.fleetNav.domain.entities.Cost;
-import com.fleetNav.domain.entities.Stop;
-
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
@@ -20,6 +15,5 @@ public class RouteRequest {
     private String origin;
     private String averageTime;
     private String mileage;
-    private List<Stop> stop;
-    private Cost cost;
+    private CostRequest cost;
 }

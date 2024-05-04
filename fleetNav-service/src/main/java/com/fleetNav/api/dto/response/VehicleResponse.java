@@ -2,7 +2,6 @@ package com.fleetNav.api.dto.response;
 
 import com.fleetNav.domain.entities.Maintenance;
 import com.fleetNav.domain.entities.NextMaintenance;
-import com.fleetNav.domain.entities.Trip;
 import com.fleetNav.domain.entities.VehicleStatus;
 
 
@@ -11,18 +10,21 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class VehicleResponse {
-    private String numberPlate;
-    private String model;
+    private UUID id;
     private String mileage;
+    private String model;
+    private String numberPlate;
+    private UUID ownerId;
     private String status;
-    private NextMaintenance nextMaintenance;
-    private VehicleStatus vehicleStatus;
-    private Trip trip;
-    private Maintenance maintenance;
-
+    private NextMaintenanceResponse nextMaintenance;
+    private VehicleStatusResponse vehicleStatus;
+    private List<MaintenanceResponse> maintenances;
 }

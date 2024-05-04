@@ -18,11 +18,11 @@ import java.util.UUID;
 public class CostController {
     @Autowired
     private CostService costService;
-
-    @PostMapping
+    //We don't need http request, because this action is called for route
+    /*@PostMapping
     public ResponseEntity<CostResponse> saveCost(@RequestBody CostRequest costRequest) {
         return ResponseEntity.ok(costService.create(costRequest));
-    }
+    }*/
 
     @PutMapping("/{id}")
     public ResponseEntity<CostResponse> updateCost(@PathVariable UUID id, @RequestBody CostRequest costRequest) {

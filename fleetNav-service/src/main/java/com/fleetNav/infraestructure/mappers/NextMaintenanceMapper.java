@@ -5,18 +5,18 @@ import com.fleetNav.api.dto.response.NextMaintenanceResponse;
 import com.fleetNav.domain.entities.NextMaintenance;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", uses = {NextMaintenanceMapper.class})
+@Mapper(componentModel = "spring", uses = {VehicleMapper.class})
 public interface NextMaintenanceMapper {
-    default UUID mapNextMaintenanceToUUID(NextMaintenance nextMaintenance) {
-        return nextMaintenance != null ? nextMaintenance.getId() : null;
-    }
 
     @Mapping(target = "id", ignore = true)
     NextMaintenance toNextMaintenance(NextMaintenanceRequest nextMaintenanceRequest);
 
     NextMaintenanceResponse toNextMaintenanceResponse(NextMaintenance nextMaintenance);
+
+    void updateFromNextMaintenanceRequest(NextMaintenanceRequest nextMaintenanceRequest, @MappingTarget NextMaintenance nextMaintenance);
 
 }

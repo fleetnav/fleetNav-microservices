@@ -1,11 +1,14 @@
 package com.fleetNav.api.dto.request;
 
-import com.fleetNav.domain.entities.Vehicle;
+
 
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
+
 
 @Getter
 @Setter
@@ -15,5 +18,5 @@ public class MaintenanceRequest {
     private String date;
     private String observation;
     private Double price;
-    private Vehicle vehicle;
+    private UUID vehicleId;
 }
