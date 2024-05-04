@@ -3,12 +3,9 @@ package com.fleetNav.infraestructure.mappers;
 import com.fleetNav.api.dto.request.CostRequest;
 import com.fleetNav.api.dto.response.CostResponse;
 import com.fleetNav.domain.entities.Cost;
-import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
-
-import java.util.UUID;
 
 @Mapper(componentModel = "spring", uses = {CostMapper.class})
 public interface CostMapper {

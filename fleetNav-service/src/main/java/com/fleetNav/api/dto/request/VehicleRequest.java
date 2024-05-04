@@ -1,10 +1,5 @@
 package com.fleetNav.api.dto.request;
 
-import com.fleetNav.domain.entities.Maintenance;
-import com.fleetNav.domain.entities.NextMaintenance;
-import com.fleetNav.domain.entities.Trip;
-import com.fleetNav.domain.entities.VehicleStatus;
-
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;

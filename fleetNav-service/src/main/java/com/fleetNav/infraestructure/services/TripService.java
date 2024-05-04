@@ -1,11 +1,7 @@
 package com.fleetNav.infraestructure.services;
 
 import com.fleetNav.api.dto.request.TripRequest;
-import com.fleetNav.api.dto.response.NextMaintenanceResponse;
-import com.fleetNav.api.dto.response.RouteResponse;
 import com.fleetNav.api.dto.response.TripResponse;
-import com.fleetNav.api.dto.response.VehicleResponse;
-import com.fleetNav.domain.entities.NextMaintenance;
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.entities.Trip;
 import com.fleetNav.domain.entities.Vehicle;
@@ -14,6 +10,7 @@ import com.fleetNav.domain.repositories.TripRepository;
 import com.fleetNav.domain.repositories.VehicleRepository;
 import com.fleetNav.infraestructure.abstract_services.ITripService;
 import com.fleetNav.infraestructure.mappers.TripMapper;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,16 +32,15 @@ public class TripService implements ITripService {
 
     @Override
     public TripResponse create(TripRequest tripRequest) {
-        System.out.println(tripRequest.toString());
         Trip trip = tripMapper.toTrip(tripRequest);
-        System.out.println(trip.toString());
+        Route route = routeRepository.findById(tripRequest.getRouteId())
+                .orElseThrow(() -> new IdNotFoundException("ROUTE", tripRequest.getRouteId()));
+        Vehicle vehicle = vehicleRepository.findById(tripRequest.getVehicleId())
+                .orElseThrow(() -> new IdNotFoundException("VEHICLE", tripRequest.getVehicleId()));
 
-        Route route = routeRepository.findById(tripRequest.getRouteId()).orElseThrow();
-        Vehicle vehicle = vehicleRepository.findById(tripRequest.getVehicleId()).orElseThrow();
-        System.out.println(trip.toString());
         trip.setRoute(route);
         trip.setVehicle(vehicle);
-        System.out.println(trip.toString());
+
         Trip saveTrip = tripRepository.save(trip);
         return tripMapper.toTripResponse(saveTrip);
     }
@@ -52,7 +48,8 @@ public class TripService implements ITripService {
     @Override
     public TripResponse update(UUID id, TripRequest tripRequest) {
         Trip existingTrip = tripRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Trip not found with the id" + id));
+                .orElseThrow(() -> new IdNotFoundException("TRIP", id));
+
         tripMapper.updateFromTripRequest(tripRequest, existingTrip);
         Trip updateTrip = tripRepository.save(existingTrip);
         return tripMapper.toTripResponse(updateTrip);
@@ -72,6 +69,7 @@ public class TripService implements ITripService {
     @Override
     public Optional<TripResponse> getById(UUID uuid) {
         Optional<Trip> trip = tripRepository.findById(uuid);
+        if (trip.isEmpty()) throw new IdNotFoundException("TRIP", uuid);
         return trip.map(tripMapper::toTripResponse);
     }
 }

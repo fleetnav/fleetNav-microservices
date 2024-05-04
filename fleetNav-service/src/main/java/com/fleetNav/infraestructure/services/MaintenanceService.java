@@ -8,6 +8,7 @@ import com.fleetNav.domain.repositories.MaintenanceRepository;
 import com.fleetNav.domain.repositories.VehicleRepository;
 import com.fleetNav.infraestructure.abstract_services.IMaintenanceService;
 import com.fleetNav.infraestructure.mappers.MaintenanceMapper;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,13 +22,15 @@ public class MaintenanceService implements IMaintenanceService {
     @Autowired
     private MaintenanceRepository maintenanceRepository;
     @Autowired
-    private  VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
     @Autowired
     private MaintenanceMapper maintenanceMapper;
 
     @Override
     public MaintenanceResponse create(MaintenanceRequest maintenanceRequest) {
-        Vehicle vehicle = vehicleRepository.findById(maintenanceRequest.getVehicleId()).orElseThrow();
+        Vehicle vehicle = vehicleRepository.findById(maintenanceRequest.getVehicleId())
+                .orElseThrow(() -> new IdNotFoundException("VEHICLE", maintenanceRequest.getVehicleId()));
+
         Maintenance maintenance = maintenanceMapper.toMaintenance(maintenanceRequest);
         maintenance.setVehicle(vehicle);
         Maintenance saveMaintenance = maintenanceRepository.save(maintenance);
@@ -37,7 +40,8 @@ public class MaintenanceService implements IMaintenanceService {
     @Override
     public MaintenanceResponse update(UUID id, MaintenanceRequest maintenanceRequest) {
         Maintenance existingMaintenance = maintenanceRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Maintenance not found with the id" + id));
+                .orElseThrow(() -> new IdNotFoundException("MAINTENANCE", id));
+
         maintenanceMapper.updateFromMaintenanceRequest(maintenanceRequest, existingMaintenance);
         Maintenance updateMaintenance = maintenanceRepository.save(existingMaintenance);
         return maintenanceMapper.toMaintenanceResponse(updateMaintenance);
@@ -57,6 +61,7 @@ public class MaintenanceService implements IMaintenanceService {
     @Override
     public Optional<MaintenanceResponse> getById(UUID uuid) {
         Optional<Maintenance> maintenance = maintenanceRepository.findById(uuid);
+        if (maintenance.isEmpty()) throw new IdNotFoundException("MAINTENANCE", uuid);
         return maintenance.map(maintenanceMapper::toMaintenanceResponse);
     }
 }

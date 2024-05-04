@@ -6,6 +6,7 @@ import com.fleetNav.domain.entities.NextMaintenance;
 import com.fleetNav.domain.repositories.NextMaintenanceRepository;
 import com.fleetNav.infraestructure.abstract_services.INextMaintenanceService;
 import com.fleetNav.infraestructure.mappers.NextMaintenanceMapper;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,8 @@ public class NextMaintenanceService implements INextMaintenanceService {
     @Override
     public NextMaintenanceResponse update(UUID uuid, NextMaintenanceRequest nextMaintenanceRequest) {
         NextMaintenance existingNextMaintenance = nextMaintenanceRepository.findById(uuid)
-                .orElseThrow(() -> new IllegalStateException("NextMaintenance not found: " + uuid));
+                .orElseThrow(() -> new IdNotFoundException("NEXT_MAINTENANCE", uuid));
+
         nextMaintenanceMapper.updateFromNextMaintenanceRequest(nextMaintenanceRequest, existingNextMaintenance);
         NextMaintenance updateNextMaintenance = nextMaintenanceRepository.save(existingNextMaintenance);
         return nextMaintenanceMapper.toNextMaintenanceResponse(updateNextMaintenance);
@@ -51,6 +53,7 @@ public class NextMaintenanceService implements INextMaintenanceService {
     @Override
     public Optional<NextMaintenanceResponse> getById(UUID uuid) {
         Optional<NextMaintenance> nextMaintenance = nextMaintenanceRepository.findById(uuid);
+        if (nextMaintenance.isEmpty()) throw new IdNotFoundException("NEXT_MAINTENANCE", uuid);
         return nextMaintenance.map(nextMaintenanceMapper::toNextMaintenanceResponse);
     }
 
