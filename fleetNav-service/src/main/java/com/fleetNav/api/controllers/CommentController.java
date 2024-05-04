@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.CommentRequest;
 import com.fleetNav.api.dto.response.CommentResponse;
-import com.fleetNav.infraestructure.services.CommentService;
+import com.fleetNav.infraestructure.abstract_services.ICommentService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/comments")
+@AllArgsConstructor
 public class CommentController {
     @Autowired
-    private CommentService commentService;
+    private final ICommentService commentService;
 
     @PostMapping
     public ResponseEntity<CommentResponse> saveComment(@RequestBody CommentRequest commentRequest) {

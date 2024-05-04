@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.RouteRequest;
 import com.fleetNav.api.dto.response.RouteResponse;
-import com.fleetNav.infraestructure.services.RouteService;
+import com.fleetNav.infraestructure.abstract_services.IRouteService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/Routes")
+@AllArgsConstructor
 public class RouteController {
     @Autowired
-    private RouteService routeService;
+    private final IRouteService routeService;
 
     @PostMapping
     public ResponseEntity<RouteResponse> saveRoute(@RequestBody RouteRequest routeRequest) {

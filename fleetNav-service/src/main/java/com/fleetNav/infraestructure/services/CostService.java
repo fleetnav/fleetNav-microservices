@@ -6,6 +6,7 @@ import com.fleetNav.domain.entities.Cost;
 import com.fleetNav.domain.repositories.CostRepository;
 import com.fleetNav.infraestructure.abstract_services.ICostService;
 import com.fleetNav.infraestructure.mappers.CostMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +16,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class CostService implements ICostService {
     @Autowired
-    private CostRepository costRepository;
+    private final CostRepository costRepository;
     @Autowired
-    private CostMapper costMapper;
+    private final CostMapper costMapper;
 
     @Override
     public CostResponse create(CostRequest costRequest) {

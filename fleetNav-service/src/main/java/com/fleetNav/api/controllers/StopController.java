@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.StopRequest;
 import com.fleetNav.api.dto.response.StopResponse;
-import com.fleetNav.infraestructure.services.StopService;
+import com.fleetNav.infraestructure.abstract_services.IStopService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/stops")
+@AllArgsConstructor
 public class StopController {
     @Autowired
-    private StopService stopService;
+    private final IStopService stopService;
 
     @PostMapping
     public ResponseEntity<StopResponse> saveStop(@RequestBody StopRequest stopRequest) {

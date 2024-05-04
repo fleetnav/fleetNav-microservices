@@ -6,6 +6,7 @@ import com.fleetNav.domain.entities.NextMaintenance;
 import com.fleetNav.domain.repositories.NextMaintenanceRepository;
 import com.fleetNav.infraestructure.abstract_services.INextMaintenanceService;
 import com.fleetNav.infraestructure.mappers.NextMaintenanceMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +16,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class NextMaintenanceService implements INextMaintenanceService {
     @Autowired
-    private NextMaintenanceRepository nextMaintenanceRepository;
+    private final NextMaintenanceRepository nextMaintenanceRepository;
     @Autowired
-    private NextMaintenanceMapper nextMaintenanceMapper;
+    private final NextMaintenanceMapper nextMaintenanceMapper;
 
     @Override
     public NextMaintenanceResponse create(NextMaintenanceRequest nextMaintenanceRequest) {

@@ -2,7 +2,9 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.MaintenanceRequest;
 import com.fleetNav.api.dto.response.MaintenanceResponse;
+import com.fleetNav.infraestructure.abstract_services.IMaintenanceService;
 import com.fleetNav.infraestructure.services.MaintenanceService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +17,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/maintenances")
+@AllArgsConstructor
 public class MaintenanceController {
     @Autowired
-    private MaintenanceService maintenanceService;
+    private final IMaintenanceService maintenanceService;
 
     @PostMapping
     public ResponseEntity<MaintenanceResponse> saveMaintenance(@RequestBody MaintenanceRequest maintenanceRequest) {

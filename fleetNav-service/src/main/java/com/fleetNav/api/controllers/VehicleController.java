@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.VehicleRequest;
 import com.fleetNav.api.dto.response.VehicleResponse;
-import com.fleetNav.infraestructure.services.VehicleService;
+import com.fleetNav.infraestructure.abstract_services.IVehicleService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/vehicles")
+@AllArgsConstructor
 public class VehicleController {
     @Autowired
-    private VehicleService vehicleService;
+    private final IVehicleService vehicleService;
 
     @PostMapping
     public ResponseEntity<VehicleResponse> saveVehicle(@RequestBody VehicleRequest vehicleRequest) {

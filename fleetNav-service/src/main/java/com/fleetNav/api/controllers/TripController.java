@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.TripRequest;
 import com.fleetNav.api.dto.response.TripResponse;
-import com.fleetNav.infraestructure.services.TripService;
+import com.fleetNav.infraestructure.abstract_services.ITripService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/trips")
+@AllArgsConstructor
 public class TripController {
     @Autowired
-    private TripService tripService;
+    private final ITripService tripService;
 
     @PostMapping
     public ResponseEntity<TripResponse> saveTrip(@RequestBody TripRequest tripRequest) {

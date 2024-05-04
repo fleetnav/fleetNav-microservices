@@ -7,8 +7,10 @@ import com.fleetNav.domain.entities.Cost;
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.repositories.CostRepository;
 import com.fleetNav.domain.repositories.RouteRepository;
+import com.fleetNav.infraestructure.abstract_services.ICostService;
 import com.fleetNav.infraestructure.abstract_services.IRouteService;
 import com.fleetNav.infraestructure.mappers.RouteMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,15 +20,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class RouteService implements IRouteService {
     @Autowired
-    private RouteRepository routeRepository;
+    private final RouteRepository routeRepository;
     @Autowired
-    private CostRepository costRepository;
+    private final CostRepository costRepository;
     @Autowired
-    private CostService costService;
+    private final ICostService costService;
     @Autowired
-    private RouteMapper routeMapper;
+    private final RouteMapper routeMapper;
 
 
     @Override

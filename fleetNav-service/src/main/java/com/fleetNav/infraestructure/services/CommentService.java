@@ -8,26 +8,26 @@ import com.fleetNav.domain.repositories.CommentRepository;
 import com.fleetNav.domain.repositories.TripRepository;
 import com.fleetNav.infraestructure.abstract_services.ICommentService;
 import com.fleetNav.infraestructure.mappers.CommentMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
+@AllArgsConstructor
 public class CommentService implements ICommentService {
 
     @Autowired
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
     @Autowired
-    private TripRepository tripRepository;
+    private final TripRepository tripRepository;
     @Autowired
-    private CommentMapper commentMapper;
+    private final CommentMapper commentMapper;
 
     @Override
     public CommentResponse create(CommentRequest commentRequest) {

@@ -8,6 +8,7 @@ import com.fleetNav.domain.repositories.MaintenanceRepository;
 import com.fleetNav.domain.repositories.VehicleRepository;
 import com.fleetNav.infraestructure.abstract_services.IMaintenanceService;
 import com.fleetNav.infraestructure.mappers.MaintenanceMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,13 +18,14 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class MaintenanceService implements IMaintenanceService {
     @Autowired
-    private MaintenanceRepository maintenanceRepository;
+    private final MaintenanceRepository maintenanceRepository;
     @Autowired
-    private  VehicleRepository vehicleRepository;
+    private final  VehicleRepository vehicleRepository;
     @Autowired
-    private MaintenanceMapper maintenanceMapper;
+    private final MaintenanceMapper maintenanceMapper;
 
     @Override
     public MaintenanceResponse create(MaintenanceRequest maintenanceRequest) {

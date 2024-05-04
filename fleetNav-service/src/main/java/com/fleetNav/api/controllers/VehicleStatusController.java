@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.VehicleStatusRequest;
 import com.fleetNav.api.dto.response.VehicleStatusResponse;
-import com.fleetNav.infraestructure.services.VehicleStatusService;
+import com.fleetNav.infraestructure.abstract_services.IVehicleStatusService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/vehicleStatus")
+@AllArgsConstructor
 public class VehicleStatusController {
     @Autowired
-    private VehicleStatusService vehicleStatusService;
+    private final IVehicleStatusService vehicleStatusService;
     // We don't need http request, because this action is called for vehicle
     /*@PostMapping
     public ResponseEntity<VehicleStatusResponse> saveVehicleStatus(@RequestBody VehicleStatusRequest vehicleStatusRequest) {

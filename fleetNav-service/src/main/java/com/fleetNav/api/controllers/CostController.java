@@ -2,7 +2,9 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.CostRequest;
 import com.fleetNav.api.dto.response.CostResponse;
+import com.fleetNav.infraestructure.abstract_services.ICostService;
 import com.fleetNav.infraestructure.services.CostService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +17,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/costs")
+@AllArgsConstructor
 public class CostController {
     @Autowired
-    private CostService costService;
+    private final ICostService costService;
     //We don't need http request, because this action is called for route
     /*@PostMapping
     public ResponseEntity<CostResponse> saveCost(@RequestBody CostRequest costRequest) {

@@ -10,6 +10,7 @@ import com.fleetNav.domain.repositories.TripRepository;
 import com.fleetNav.domain.repositories.VehicleRepository;
 import com.fleetNav.infraestructure.abstract_services.ITripService;
 import com.fleetNav.infraestructure.mappers.TripMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,15 +20,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class TripService implements ITripService {
     @Autowired
-    private TripRepository tripRepository;
+    private final TripRepository tripRepository;
     @Autowired
-    private RouteRepository routeRepository;
+    private final RouteRepository routeRepository;
     @Autowired
-    private VehicleRepository vehicleRepository;
+    private final VehicleRepository vehicleRepository;
     @Autowired
-    private TripMapper tripMapper;
+    private final TripMapper tripMapper;
 
     @Override
     public TripResponse create(TripRequest tripRequest) {

@@ -4,12 +4,12 @@ import com.fleetNav.api.dto.request.StopRequest;
 import com.fleetNav.api.dto.response.StopResponse;
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.entities.Stop;
-import com.fleetNav.domain.entities.Trip;
 import com.fleetNav.domain.repositories.RouteRepository;
 import com.fleetNav.domain.repositories.StopRepository;
-import com.fleetNav.domain.repositories.TripRepository;
+import com.fleetNav.infraestructure.abstract_services.IRouteService;
 import com.fleetNav.infraestructure.abstract_services.IStopService;
 import com.fleetNav.infraestructure.mappers.StopMapper;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,15 +19,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@AllArgsConstructor
 public class StopService implements IStopService {
     @Autowired
-    private StopRepository stopRepository;
+    private final StopRepository stopRepository;
     @Autowired
-    private RouteRepository routeRepository;
+    private final RouteRepository routeRepository;
     @Autowired
-    private RouteService routeService;
+    private final IRouteService routeService;
     @Autowired
-    private StopMapper stopMapper;
+    private final StopMapper stopMapper;
 
     @Override
     public StopResponse create(StopRequest stopRequest) {

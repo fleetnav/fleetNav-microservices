@@ -2,7 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.NextMaintenanceRequest;
 import com.fleetNav.api.dto.response.NextMaintenanceResponse;
-import com.fleetNav.infraestructure.services.NextMaintenanceService;
+import com.fleetNav.infraestructure.abstract_services.INextMaintenanceService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,9 +16,10 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/nextMaintenances")
+@AllArgsConstructor
 public class NextMaintenanceController {
     @Autowired
-    private NextMaintenanceService nextMaintenanceService;
+    private final INextMaintenanceService nextMaintenanceService;
     // We don't need http request, because this action is called for vehicle
     /*@PostMapping
     public ResponseEntity<NextMaintenanceResponse> saveNextMaintenance(@RequestBody NextMaintenanceRequest nextMaintenanceRequest) {
