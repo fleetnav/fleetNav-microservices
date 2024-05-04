@@ -4,9 +4,13 @@ spring:
 
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/fleetNav
+    # url: jdbc:postgresql://localhost:5433/fleetNav
+    # username: postgres
+    # password: postgres
+    
+    url: jdbc:postgresql://localhost:5432/fleetNav
     username: postgres
-    password: postgres
+    password : juanpablo
   jpa:
     hibernate:
       ddl-auto: update

@@ -1,8 +1,6 @@
 package com.fleetNav.api.dto.request;
 
 
-import com.fleetNav.domain.entities.Route;
-import com.fleetNav.domain.entities.Vehicle;
 
 import lombok.*;
 

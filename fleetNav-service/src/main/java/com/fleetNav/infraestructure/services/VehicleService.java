@@ -1,13 +1,13 @@
 package com.fleetNav.infraestructure.services;
 
 import com.fleetNav.api.dto.request.VehicleRequest;
-import com.fleetNav.api.dto.response.CostResponse;
+
 import com.fleetNav.api.dto.response.NextMaintenanceResponse;
 import com.fleetNav.api.dto.response.VehicleResponse;
 import com.fleetNav.api.dto.response.VehicleStatusResponse;
 import com.fleetNav.domain.entities.NextMaintenance;
 import com.fleetNav.domain.entities.Vehicle;
-import com.fleetNav.domain.entities.Trip;
+
 import com.fleetNav.domain.entities.VehicleStatus;
 import com.fleetNav.domain.repositories.NextMaintenanceRepository;
 import com.fleetNav.domain.repositories.VehicleRepository;
