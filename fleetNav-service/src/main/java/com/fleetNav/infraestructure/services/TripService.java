@@ -1,7 +1,9 @@
 package com.fleetNav.infraestructure.services;
 
 import com.fleetNav.api.dto.request.TripRequest;
+
 import com.fleetNav.api.dto.response.TripResponse;
+
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.entities.Trip;
 import com.fleetNav.domain.entities.Vehicle;
