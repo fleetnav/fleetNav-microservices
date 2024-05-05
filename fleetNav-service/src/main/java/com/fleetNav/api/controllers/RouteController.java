@@ -14,7 +14,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/Routes")
+@RequestMapping("/routes")
 public class RouteController {
     @Autowired
     private RouteService routeService;
