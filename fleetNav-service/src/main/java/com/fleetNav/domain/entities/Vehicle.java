@@ -4,10 +4,7 @@ package com.fleetNav.domain.entities;
 import com.fleetNav.util.enums.VehicleStatusEnum;
 import jakarta.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +14,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
