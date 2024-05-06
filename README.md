@@ -107,3 +107,9 @@ Implement measures to ensure that application performance does not significantly
 Browser Compatibility:
 The application must be compatible with a wide range of modern web browsers, including Chrome, Firefox, Safari, and Edge.
 Conduct comprehensive compatibility testing to ensure the application functions correctly on different browsers and versions.
+
+# Diagrams
+
+![Here is the image of the flowchart of the application.](https://res.cloudinary.com/dxdkd2q9d/image/upload/v1715030858/diagrama_general_kpnb2f.jpg)
+![Here is the image of the application database diagram.](https://res.cloudinary.com/dxdkd2q9d/image/upload/v1715030857/base_de_datos_cxm5ll.jpg)
+
