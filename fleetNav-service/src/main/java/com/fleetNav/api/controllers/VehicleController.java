@@ -3,6 +3,7 @@ package com.fleetNav.api.controllers;
 import com.fleetNav.api.dto.request.VehicleRequest;
 import com.fleetNav.api.dto.response.VehicleResponse;
 
+import com.fleetNav.infraestructure.abstract_services.IVehicleService;
 import com.fleetNav.infraestructure.services.VehicleService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,17 +29,17 @@ import java.util.UUID;
 @RequestMapping("/vehicles")
 public class VehicleController {
     @Autowired
-    private VehicleService vehicleService;
+    private IVehicleService vehicleService;
 
     // --------------------------------------------//
     // *******SAVE*******//
     @Operation(summary = "Save a Vehicle", description = "Saves a new Vehicle in the database.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Vehicle successfully saved", content = {
-                    @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json") }),
+                    @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping
     public ResponseEntity<VehicleResponse> saveVehicle(@RequestBody VehicleRequest vehicleRequest) {
         return ResponseEntity.ok(vehicleService.create(vehicleRequest));
@@ -49,13 +50,13 @@ public class VehicleController {
     @Operation(summary = "Update a Vehicle", description = "updates an existing Vehicle in the database")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Vehicle successfully update", content = {
-                    @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json") }),
+                    @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PutMapping("/{id}")
-    public ResponseEntity<VehicleResponse> updateVehicle(@Parameter(description = "Id of the Vehicle to be update")@PathVariable UUID id,
-            @RequestBody VehicleRequest vehicleRequest) {
+    public ResponseEntity<VehicleResponse> updateVehicle(@Parameter(description = "Id of the Vehicle to be update") @PathVariable UUID id,
+                                                         @RequestBody VehicleRequest vehicleRequest) {
         return ResponseEntity.ok(vehicleService.update(id, vehicleRequest));
     }
 
@@ -68,7 +69,7 @@ public class VehicleController {
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVehicle(
-            @Parameter(description = "Id of the Vehicle to be deleted")@PathVariable UUID id) {
+            @Parameter(description = "Id of the Vehicle to be deleted") @PathVariable UUID id) {
         vehicleService.delete(id);
         return ResponseEntity.noContent().build();
     }
@@ -78,8 +79,8 @@ public class VehicleController {
     @Operation(summary = "Get all Vehicles", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<VehicleResponse>> getAllVehicles(
-            @Parameter(description = "Page number ")@RequestParam(defaultValue = "0") int page,
-            @Parameter(description = "Number of items per page")@RequestParam(defaultValue = "5") int size) {
+            @Parameter(description = "Page number ") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Number of items per page") @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         if (page != 0)
             pageable = PageRequest.of(page - 1, size);
@@ -90,12 +91,12 @@ public class VehicleController {
 
     @Operation(summary = "Get Vehicle by Id", description = "Retrieves a Vehicle object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Vehicle found", content = @Content(schema = @Schema(implementation = VehicleResponse.class),mediaType = "application/json")),
+            @ApiResponse(responseCode = "200", description = "Vehicle found", content = @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Vehicle not found")
     })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<VehicleResponse>> getVehicle(
-            @Parameter(description = "id of the Vehicle to be get")@PathVariable UUID id) {
+            @Parameter(description = "id of the Vehicle to be get") @PathVariable UUID id) {
         return ResponseEntity.ok(vehicleService.getById(id));
     }
 }

@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import com.fleetNav.infraestructure.abstract_services.IStopService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -26,9 +28,10 @@ import java.util.UUID;
 @Tag(name = "Stop", description = "Our application's stop controller provides RESTful endpoints to manage and obtain information about stops on a transport route.")
 @RestController
 @RequestMapping("/stops")
+@AllArgsConstructor
 public class StopController {
     @Autowired
-    private StopService stopService;
+    private final IStopService stopService;
 
     // --------------------------------------------//
     // *******SAVE*******//

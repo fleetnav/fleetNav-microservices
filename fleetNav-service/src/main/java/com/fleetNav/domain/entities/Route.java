@@ -14,10 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
@@ -45,7 +42,6 @@ public class Route {
     private String mileage;
 
     @OneToMany(mappedBy = "route", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonManagedReference
     private List<Stop> stops = new ArrayList<>();
 
     @OneToOne(cascade = CascadeType.ALL)

@@ -3,6 +3,7 @@ package com.fleetNav.api.controllers;
 import com.fleetNav.api.dto.request.VehicleStatusRequest;
 import com.fleetNav.api.dto.response.VehicleStatusResponse;
 
+import com.fleetNav.infraestructure.abstract_services.IVehicleStatusService;
 import com.fleetNav.infraestructure.services.VehicleStatusService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +29,7 @@ import java.util.UUID;
 @RequestMapping("/vehicleStatus")
 public class VehicleStatusController {
     @Autowired
-    private VehicleStatusService vehicleStatusService;
+    private IVehicleStatusService vehicleStatusService;
     // We don't need http request, because this action is called for vehicle
     /*
      * @PostMapping
@@ -43,15 +44,16 @@ public class VehicleStatusController {
     @Operation(summary = "Update a vehicle status", description = "updates an existing vehicle status in the database")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Vehicle Status successfully update", content = {
-                    @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json") }),
+                    @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PutMapping("/{id}")
-    public ResponseEntity<VehicleStatusResponse> updateVehicleStatus( @Parameter(description = "Id of the Vehicle Status to be update")@PathVariable UUID id,
-            @RequestBody VehicleStatusRequest vehicleStatusRequest) {
+    public ResponseEntity<VehicleStatusResponse> updateVehicleStatus(@Parameter(description = "Id of the Vehicle Status to be update") @PathVariable UUID id,
+                                                                     @RequestBody VehicleStatusRequest vehicleStatusRequest) {
         return ResponseEntity.ok(vehicleStatusService.update(id, vehicleStatusRequest));
     }
+
     // for delete a vehicle status is required delete the car first
     /*
      * @DeleteMapping("/{id}")
@@ -65,8 +67,8 @@ public class VehicleStatusController {
     @Operation(summary = "Get all Status of Vehicles", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<VehicleStatusResponse>> getAllVehicleStatus(
-            @Parameter(description = "Page number ")@RequestParam(defaultValue = "0") int page,
-            @Parameter(description = "Number of items per page")@RequestParam(defaultValue = "5") int size) {
+            @Parameter(description = "Page number ") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Number of items per page") @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         if (page != 0)
             pageable = PageRequest.of(page - 1, size);
@@ -77,12 +79,12 @@ public class VehicleStatusController {
 
     @Operation(summary = "Get Vehicle Status by Id", description = "Retrieves a Vehicle Status object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Vehicle Status found", content = @Content(schema = @Schema(implementation = VehicleStatusResponse.class),mediaType = "application/json")),
+            @ApiResponse(responseCode = "200", description = "Vehicle Status found", content = @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Vehicle Status not found")
     })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<VehicleStatusResponse>> getVehicleStatus(
-            @Parameter(description = "id of the Vehicle Status to be get")@PathVariable UUID id) {
+            @Parameter(description = "id of the Vehicle Status to be get") @PathVariable UUID id) {
         return ResponseEntity.ok(vehicleStatusService.getById(id));
     }
 }

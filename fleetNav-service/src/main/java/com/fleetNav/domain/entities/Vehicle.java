@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,8 +40,8 @@ public class Vehicle {
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Trip> trips;
 
-    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Maintenance> maintenances;
+    @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Maintenance> maintenances = new ArrayList<>();
 
     @OneToOne
     @JoinColumn(name = "next_maintenance_id", referencedColumnName = "id")

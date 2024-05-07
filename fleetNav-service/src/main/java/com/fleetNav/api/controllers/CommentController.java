@@ -2,8 +2,8 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.CommentRequest;
 import com.fleetNav.api.dto.response.CommentResponse;
-
-import com.fleetNav.infraestructure.services.CommentService;
+import com.fleetNav.infraestructure.abstract_services.ICommentService;
+import lombok.AllArgsConstructor;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -28,9 +28,11 @@ import java.util.UUID;
 @Tag(name = "Comment" , description = "Our application's comment controller provides RESTful endpoints for managing comments on the platform. Use this controller to allow users to create, read, update and delete comments in different parts of the application.")
 @RestController
 @RequestMapping("/comments")
+@AllArgsConstructor
 public class CommentController {
     @Autowired
-    private CommentService commentService;
+    private final ICommentService commentService;
+
     //--------------------------------------------//
     //*******SAVE*******//
     @Operation(
@@ -81,7 +83,7 @@ public class CommentController {
     @Operation(summary = "Get all Comments", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<CommentResponse>> getAllComments(
-            @Parameter(description = "Page number ")@RequestParam(defaultValue = "0") int page, 
+            @Parameter(description = "Page number ")@RequestParam(defaultValue = "0") int page,
             @Parameter(description = "Number of items per page")@RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
         if (page != 0) pageable = PageRequest.of(page - 1, size);

@@ -2,9 +2,7 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.RouteRequest;
 import com.fleetNav.api.dto.response.RouteResponse;
-
-import com.fleetNav.infraestructure.services.RouteService;
-
+import com.fleetNav.infraestructure.abstract_services.IRouteService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -12,7 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -25,20 +23,21 @@ import java.util.UUID;
 
 @Tag(name = "Route", description = "The route controller of our application provides RESTful endpoints to manage and obtain detailed information about the routes of a vehicle.")
 @RestController
-@RequestMapping("/routes")
+@RequestMapping("/Routes")
+@AllArgsConstructor
 public class RouteController {
     @Autowired
-    private RouteService routeService;
+    private final IRouteService routeService;
 
     // --------------------------------------------//
     // *******SAVE*******//  
     @Operation(summary = "Save a Route", description = "Saves a new Route in the database.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Route successfully saved", content = {
-                    @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json") }),
+                    @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping
     public ResponseEntity<RouteResponse> saveRoute(@RequestBody RouteRequest routeRequest) {
         return ResponseEntity.ok(routeService.create(routeRequest));
@@ -49,10 +48,10 @@ public class RouteController {
     @Operation(summary = "Update a Route", description = "updates an existing Route in the database")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Route successfully update", content = {
-                    @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json") }),
+                    @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema()) }),
-            @ApiResponse(responseCode = "500", content = { @Content(schema = @Schema()) }) })
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PutMapping("/{id}")
     public ResponseEntity<RouteResponse> updateRoute(
             @Parameter(description = "Id of the Route to be update") @PathVariable UUID id,
@@ -91,7 +90,7 @@ public class RouteController {
 
     @Operation(summary = "Get Route by Id", description = "Retrieves a Route object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Route found", content = @Content(schema = @Schema(implementation = RouteResponse.class),mediaType = "application/json")),
+            @ApiResponse(responseCode = "200", description = "Route found", content = @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "404", description = "Route not found")
     })
     @GetMapping("/{id}")
