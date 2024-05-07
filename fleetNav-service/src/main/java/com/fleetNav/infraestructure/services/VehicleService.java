@@ -12,7 +12,7 @@ import com.fleetNav.domain.repositories.VehicleRepository;
 import com.fleetNav.domain.repositories.VehicleStatusRepository;
 import com.fleetNav.infraestructure.abstract_services.IVehicleService;
 import com.fleetNav.infraestructure.mappers.VehicleMapper;
-import lombok.AllArgsConstructor;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,20 +22,19 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class VehicleService implements IVehicleService {
     @Autowired
-    private final VehicleRepository vehicleRepository;
+    private VehicleRepository vehicleRepository;
     @Autowired
-    private final NextMaintenanceRepository nextMaintenanceRepository;
+    private NextMaintenanceRepository nextMaintenanceRepository;
     @Autowired
-    private final VehicleStatusRepository vehicleStatusRepository;
+    private VehicleStatusRepository vehicleStatusRepository;
     @Autowired
-    private final VehicleStatusService vehicleStatusService;
+    private VehicleStatusService vehicleStatusService;
     @Autowired
-    private final NextMaintenanceService nextMaintenanceService;
+    private NextMaintenanceService nextMaintenanceService;
     @Autowired
-    private final VehicleMapper vehicleMapper;
+    private VehicleMapper vehicleMapper;
 
     @Override
     public VehicleResponse create(VehicleRequest vehicleRequest) {
@@ -43,8 +42,10 @@ public class VehicleService implements IVehicleService {
         NextMaintenanceResponse nextMaintenanceResponse = nextMaintenanceService.create(vehicleRequest.getNextMaintenance());
         VehicleStatusResponse vehicleStatusResponse = vehicleStatusService.create(vehicleRequest.getVehicleStatus());
 
-        NextMaintenance nextMaintenance = nextMaintenanceRepository.findById(nextMaintenanceResponse.getId()).orElseThrow();
-        VehicleStatus vehicleStatus = vehicleStatusRepository.findById(vehicleStatusResponse.getId()).orElseThrow();
+        NextMaintenance nextMaintenance = nextMaintenanceRepository.findById(nextMaintenanceResponse.getId())
+                .orElseThrow(() -> new IdNotFoundException("NEXT_MAINTENANCE", nextMaintenanceResponse.getId()));
+        VehicleStatus vehicleStatus = vehicleStatusRepository.findById(vehicleStatusResponse.getId())
+                .orElseThrow(() -> new IdNotFoundException("VEHICLE", vehicleStatusResponse.getId()));
 
         vehicle.setVehicleStatus(vehicleStatus);
         vehicle.setNextMaintenance(nextMaintenance);
@@ -56,7 +57,8 @@ public class VehicleService implements IVehicleService {
     @Override
     public VehicleResponse update(UUID id, VehicleRequest vehicleRequest) {
         Vehicle existingVehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Vehicle not found with the id" + id));
+                .orElseThrow(() -> new IdNotFoundException("VEHICLE", id));
+
         vehicleMapper.updateFromVehicleRequest(vehicleRequest, existingVehicle);
         Vehicle updateVehicle = vehicleRepository.save(existingVehicle);
         return vehicleMapper.toVehicleResponse(updateVehicle);
@@ -76,6 +78,7 @@ public class VehicleService implements IVehicleService {
     @Override
     public Optional<VehicleResponse> getById(UUID uuid) {
         Optional<Vehicle> vehicle = vehicleRepository.findById(uuid);
+        if (vehicle.isEmpty()) throw new IdNotFoundException("VEHICLE", uuid);
         return vehicle.map(vehicleMapper::toVehicleResponse);
     }
 }

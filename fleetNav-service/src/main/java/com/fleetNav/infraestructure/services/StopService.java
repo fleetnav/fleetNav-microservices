@@ -4,12 +4,13 @@ import com.fleetNav.api.dto.request.StopRequest;
 import com.fleetNav.api.dto.response.StopResponse;
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.entities.Stop;
+
 import com.fleetNav.domain.repositories.RouteRepository;
 import com.fleetNav.domain.repositories.StopRepository;
-import com.fleetNav.infraestructure.abstract_services.IRouteService;
+
 import com.fleetNav.infraestructure.abstract_services.IStopService;
 import com.fleetNav.infraestructure.mappers.StopMapper;
-import lombok.AllArgsConstructor;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,21 +20,22 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class StopService implements IStopService {
     @Autowired
-    private final StopRepository stopRepository;
+    private StopRepository stopRepository;
     @Autowired
-    private final RouteRepository routeRepository;
+    private RouteRepository routeRepository;
     @Autowired
-    private final IRouteService routeService;
+    private RouteService routeService;
     @Autowired
-    private final StopMapper stopMapper;
+    private StopMapper stopMapper;
 
     @Override
     public StopResponse create(StopRequest stopRequest) {
         Stop stop = stopMapper.toStop(stopRequest);
-        Route route = routeRepository.findById(stopRequest.getRouteId()).orElseThrow();
+        Route route = routeRepository.findById(stopRequest.getRouteId())
+                .orElseThrow(() -> new IdNotFoundException("ROUTE", stopRequest.getRouteId()));
+
         stop.setRoute(route);
         Stop saveStop = stopRepository.save(stop);
         return stopMapper.toStopResponse(saveStop);
@@ -42,7 +44,8 @@ public class StopService implements IStopService {
     @Override
     public StopResponse update(UUID id, StopRequest stopRequest) {
         Stop existingStop = stopRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Stop not found with the id" + id));
+                .orElseThrow(() -> new IdNotFoundException("STOP", id));
+
         stopMapper.updateFromStopRequest(stopRequest, existingStop);
         Stop updateStop = stopRepository.save(existingStop);
         return stopMapper.toStopResponse(updateStop);
@@ -62,6 +65,7 @@ public class StopService implements IStopService {
     @Override
     public Optional<StopResponse> getById(UUID uuid) {
         Optional<Stop> stop = stopRepository.findById(uuid);
+        if (stop.isEmpty()) throw new IdNotFoundException("STOP", uuid);
         return stop.map(stopMapper::toStopResponse);
     }
 }

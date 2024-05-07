@@ -6,7 +6,7 @@ import com.fleetNav.api.dto.response.VehicleStatusResponse;
 import com.fleetNav.domain.repositories.VehicleStatusRepository;
 import com.fleetNav.infraestructure.abstract_services.IVehicleStatusService;
 import com.fleetNav.infraestructure.mappers.VehicleStatusMapper;
-import lombok.AllArgsConstructor;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +16,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class VehicleStatusService implements IVehicleStatusService {
     @Autowired
-    private final VehicleStatusRepository vehicleStatusRepository;
+    private VehicleStatusRepository vehicleStatusRepository;
     @Autowired
-    private final VehicleStatusMapper vehicleStatusMapper;
+    private VehicleStatusMapper vehicleStatusMapper;
 
     @Override
     public VehicleStatusResponse create(VehicleStatusRequest vehicleStatusRequest) {
@@ -33,7 +32,8 @@ public class VehicleStatusService implements IVehicleStatusService {
     @Override
     public VehicleStatusResponse update(UUID uuid, VehicleStatusRequest vehicleStatusRequest) {
         VehicleStatus existingVehicleStatus = vehicleStatusRepository.findById(uuid)
-                .orElseThrow(() -> new IllegalStateException("VehicleStatus not found: " + uuid));
+                .orElseThrow(() -> new IdNotFoundException("VEHICLE_STATUS", uuid));
+
         vehicleStatusMapper.updateFromVehicleStatusRequest(vehicleStatusRequest, existingVehicleStatus);
         VehicleStatus updateVehicleStatus = vehicleStatusRepository.save(existingVehicleStatus);
         return vehicleStatusMapper.toVehicleStatusResponse(updateVehicleStatus);
@@ -53,6 +53,7 @@ public class VehicleStatusService implements IVehicleStatusService {
     @Override
     public Optional<VehicleStatusResponse> getById(UUID uuid) {
         Optional<VehicleStatus> vehicleStatus = vehicleStatusRepository.findById(uuid);
+        if (vehicleStatus.isEmpty()) throw new IdNotFoundException("VEHICLE_STATUS", uuid);
         return vehicleStatus.map(vehicleStatusMapper::toVehicleStatusResponse);
     }
 }

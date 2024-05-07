@@ -1,6 +1,6 @@
 package com.fleetNav.api.dto.response;
 
-import com.fleetNav.domain.entities.Vehicle;
+
 
 import lombok.NoArgsConstructor;
 import lombok.Getter;

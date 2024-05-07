@@ -6,7 +6,7 @@ import com.fleetNav.domain.entities.Cost;
 import com.fleetNav.domain.repositories.CostRepository;
 import com.fleetNav.infraestructure.abstract_services.ICostService;
 import com.fleetNav.infraestructure.mappers.CostMapper;
-import lombok.AllArgsConstructor;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,12 +16,11 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class CostService implements ICostService {
     @Autowired
-    private final CostRepository costRepository;
+    private CostRepository costRepository;
     @Autowired
-    private final CostMapper costMapper;
+    private CostMapper costMapper;
 
     @Override
     public CostResponse create(CostRequest costRequest) {
@@ -33,7 +32,8 @@ public class CostService implements ICostService {
     @Override
     public CostResponse update(UUID uuid, CostRequest costRequest) {
         Cost existingCost = costRepository.findById(uuid)
-                .orElseThrow(() -> new IllegalStateException("Cost not found: " + uuid));
+                .orElseThrow(() -> new IdNotFoundException("COST", uuid));
+
         costMapper.updateFromCostRequest(costRequest, existingCost);
         Cost updateCost = costRepository.save(existingCost);
         return costMapper.toCostResponse(updateCost);
@@ -53,6 +53,7 @@ public class CostService implements ICostService {
     @Override
     public Optional<CostResponse> getById(UUID uuid) {
         Optional<Cost> cost = costRepository.findById(uuid);
+        if (cost.isEmpty()) throw new IdNotFoundException("COST", uuid);
         return cost.map(costMapper::toCostResponse);
     }
 }

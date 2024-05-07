@@ -1,18 +1,5 @@
 spring:
   application:
     name: FLEETNAV-SERVICE
-
-
-  datasource:
-    url: jdbc:postgresql://localhost:5433/fleetNav
-    username: postgres
-    password: postgres
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-server:
-  port: 8090
-  servlet:
-    context-path: /api/v1
+  config:
+    import: optional:configserver:http://localhost:8085

@@ -7,10 +7,9 @@ import com.fleetNav.domain.entities.Cost;
 import com.fleetNav.domain.entities.Route;
 import com.fleetNav.domain.repositories.CostRepository;
 import com.fleetNav.domain.repositories.RouteRepository;
-import com.fleetNav.infraestructure.abstract_services.ICostService;
 import com.fleetNav.infraestructure.abstract_services.IRouteService;
 import com.fleetNav.infraestructure.mappers.RouteMapper;
-import lombok.AllArgsConstructor;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,23 +19,24 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@AllArgsConstructor
 public class RouteService implements IRouteService {
     @Autowired
-    private final RouteRepository routeRepository;
+    private RouteRepository routeRepository;
     @Autowired
-    private final CostRepository costRepository;
+    private CostRepository costRepository;
     @Autowired
-    private final ICostService costService;
+    private CostService costService;
     @Autowired
-    private final RouteMapper routeMapper;
+    private RouteMapper routeMapper;
 
 
     @Override
     public RouteResponse create(RouteRequest routeRequest) {
         Route route = routeMapper.toRoute(routeRequest);
         CostResponse costResponse = costService.create(routeRequest.getCost());
-        Cost cost = costRepository.findById(costResponse.getId()).orElseThrow();
+        Cost cost = costRepository.findById(costResponse.getId())
+                .orElseThrow(() -> new IdNotFoundException("COST", costResponse.getId()));
+
         route.setCostId(cost);
         Route saveRoute = routeRepository.save(route);
         return routeMapper.toRouteResponse(saveRoute);
@@ -45,7 +45,7 @@ public class RouteService implements IRouteService {
     @Override
     public RouteResponse update(UUID uuid, RouteRequest routeRequest) {
         Route existingRoute = routeRepository.findById(uuid)
-                .orElseThrow(() -> new IllegalStateException("Route not found: " + uuid));
+                .orElseThrow(() -> new IdNotFoundException("ROUTE", uuid));
         routeMapper.updateFromRouteRequest(routeRequest, existingRoute);
         Route updateRoute = routeRepository.save(existingRoute);
         return routeMapper.toRouteResponse(updateRoute);
@@ -58,13 +58,14 @@ public class RouteService implements IRouteService {
 
     @Override
     public Page<RouteResponse> getAll(Pageable pageable) {
-        Page<Route> RoutePage = routeRepository.findAll(pageable);
-        return RoutePage.map(routeMapper::toRouteResponse);
+        Page<Route> routePage = routeRepository.findAll(pageable);
+        return routePage.map(routeMapper::toRouteResponse);
     }
 
     @Override
     public Optional<RouteResponse> getById(UUID uuid) {
-        Optional<Route> Route = routeRepository.findById(uuid);
-        return Route.map(routeMapper::toRouteResponse);
+        Optional<Route> route = routeRepository.findById(uuid);
+        if (route.isEmpty()) throw new IdNotFoundException("ROUTE", uuid);
+        return route.map(routeMapper::toRouteResponse);
     }
 }

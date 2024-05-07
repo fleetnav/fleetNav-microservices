@@ -9,13 +9,16 @@ import com.fleetNav.domain.repositories.TripRepository;
 import com.fleetNav.infraestructure.abstract_services.ICommentService;
 import com.fleetNav.infraestructure.mappers.CommentMapper;
 import lombok.AllArgsConstructor;
+import com.fleetNav.util.exceptions.IdNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Optional;
 import java.util.UUID;
+
 
 @Service
 @AllArgsConstructor
@@ -32,7 +35,9 @@ public class CommentService implements ICommentService {
     @Override
     public CommentResponse create(CommentRequest commentRequest) {
         Comment comment = commentMapper.toComment(commentRequest);
-        Trip trip =  tripRepository.findById(commentRequest.getTripId()).orElseThrow();
+        Trip trip = tripRepository.findById(commentRequest.getTripId())
+                .orElseThrow(() -> new IdNotFoundException("TRIP", commentRequest.getTripId()));
+
         comment.setTrip(trip);
         Comment saveComment = commentRepository.save(comment);
         return commentMapper.toCommentResponse(saveComment);
@@ -41,7 +46,8 @@ public class CommentService implements ICommentService {
     @Override
     public CommentResponse update(UUID id, CommentRequest commentRequest) {
         Comment existingComment = commentRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Comment not found with the id" + id));
+                .orElseThrow(() -> new IdNotFoundException("COMMENT", id));
+
         commentMapper.updateFromCommentRequest(commentRequest, existingComment);
         Comment updateComment = commentRepository.save(existingComment);
         return commentMapper.toCommentResponse(updateComment);
@@ -61,6 +67,7 @@ public class CommentService implements ICommentService {
     @Override
     public Optional<CommentResponse> getById(UUID uuid) {
         Optional<Comment> comment = commentRepository.findById(uuid);
+        if (comment.isEmpty()) throw new IdNotFoundException("COMMENT", uuid);
         return comment.map(commentMapper::toCommentResponse);
     }
 }

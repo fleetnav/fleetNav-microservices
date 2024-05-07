@@ -8,8 +8,6 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.Mappings;
 
-import java.util.UUID;
-
 @Mapper(componentModel = "spring", uses = {TripMapper.class,CommentMapper.class})
 public interface TripMapper {
     @Mapping(target = "id", ignore = true)

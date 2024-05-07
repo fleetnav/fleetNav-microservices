@@ -2,8 +2,18 @@ package com.fleetNav.api.controllers;
 
 import com.fleetNav.api.dto.request.VehicleRequest;
 import com.fleetNav.api.dto.response.VehicleResponse;
+
 import com.fleetNav.infraestructure.abstract_services.IVehicleService;
-import lombok.AllArgsConstructor;
+import com.fleetNav.infraestructure.services.VehicleService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -14,38 +24,79 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 import java.util.UUID;
 
+@Tag(name = "Vehicle", description = "Our application's vehicle controller provides RESTful endpoints to manage and obtain information about the vehicles in a fleet.")
 @RestController
 @RequestMapping("/vehicles")
-@AllArgsConstructor
 public class VehicleController {
     @Autowired
-    private final IVehicleService vehicleService;
+    private IVehicleService vehicleService;
 
+    // --------------------------------------------//
+    // *******SAVE*******//
+    @Operation(summary = "Save a Vehicle", description = "Saves a new Vehicle in the database.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Vehicle successfully saved", content = {
+                    @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping
     public ResponseEntity<VehicleResponse> saveVehicle(@RequestBody VehicleRequest vehicleRequest) {
         return ResponseEntity.ok(vehicleService.create(vehicleRequest));
     }
+    // --------------------------------------------//
+    // *******UPDATE*******//
 
+    @Operation(summary = "Update a Vehicle", description = "updates an existing Vehicle in the database")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Vehicle successfully update", content = {
+                    @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json")}),
+            @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
+                    @Content(schema = @Schema())}),
+            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PutMapping("/{id}")
-    public ResponseEntity<VehicleResponse> updateVehicle(@PathVariable UUID id, @RequestBody VehicleRequest vehicleRequest) {
+    public ResponseEntity<VehicleResponse> updateVehicle(@Parameter(description = "Id of the Vehicle to be update") @PathVariable UUID id,
+                                                         @RequestBody VehicleRequest vehicleRequest) {
         return ResponseEntity.ok(vehicleService.update(id, vehicleRequest));
     }
 
+    // --------------------------------------------//
+    // *******DELETE*******//
+    @Operation(summary = "Delete Vehicle by Id", description = "Deletes a Vehicle object by specifying its id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Vehicle deleted"),
+            @ApiResponse(responseCode = "404", description = "Vehicle not found")
+    })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteVehicle(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteVehicle(
+            @Parameter(description = "Id of the Vehicle to be deleted") @PathVariable UUID id) {
         vehicleService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
+    // --------------------------------------------//
+    // *******GET-ALL*******//
+    @Operation(summary = "Get all Vehicles", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
-    public ResponseEntity<Page<VehicleResponse>> getAllVehicles(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "5") int size) {
+    public ResponseEntity<Page<VehicleResponse>> getAllVehicles(
+            @Parameter(description = "Page number ") @RequestParam(defaultValue = "0") int page,
+            @Parameter(description = "Number of items per page") @RequestParam(defaultValue = "5") int size) {
         Pageable pageable = PageRequest.of(page, size);
-        if (page != 0) pageable = PageRequest.of(page - 1, size);
+        if (page != 0)
+            pageable = PageRequest.of(page - 1, size);
         return ResponseEntity.ok(vehicleService.getAll(pageable));
     }
+    // --------------------------------------------//
+    // *******GET-BY-ID*******//
 
+    @Operation(summary = "Get Vehicle by Id", description = "Retrieves a Vehicle object by specifying its id.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Vehicle found", content = @Content(schema = @Schema(implementation = VehicleResponse.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "404", description = "Vehicle not found")
+    })
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<VehicleResponse>> getVehicle(@PathVariable UUID id) {
+    public ResponseEntity<Optional<VehicleResponse>> getVehicle(
+            @Parameter(description = "id of the Vehicle to be get") @PathVariable UUID id) {
         return ResponseEntity.ok(vehicleService.getById(id));
     }
 }

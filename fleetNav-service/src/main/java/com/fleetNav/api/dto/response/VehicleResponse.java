@@ -1,8 +1,6 @@
 package com.fleetNav.api.dto.response;
 
-import com.fleetNav.domain.entities.Maintenance;
-import com.fleetNav.domain.entities.NextMaintenance;
-import com.fleetNav.domain.entities.VehicleStatus;
+
 
 
 import lombok.NoArgsConstructor;

@@ -3,10 +3,6 @@ package com.fleetNav.api.dto.response;
 import java.util.List;
 import java.util.UUID;
 
-import com.fleetNav.domain.entities.Comment;
-import com.fleetNav.domain.entities.Route;
-import com.fleetNav.domain.entities.Vehicle;
-
 import lombok.NoArgsConstructor;
 import lombok.Getter;
 import lombok.AllArgsConstructor;
