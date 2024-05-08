@@ -23,7 +23,7 @@ import java.util.UUID;
 
 @Tag(name = "Route", description = "The route controller of our application provides RESTful endpoints to manage and obtain detailed information about the routes of a vehicle.")
 @RestController
-@RequestMapping("/Routes")
+@RequestMapping("/routes")
 @AllArgsConstructor
 public class RouteController {
     @Autowired
