@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tenants")
 public class TenantController {
     @Autowired
     private ITenantService tenantService;
@@ -21,7 +20,7 @@ public class TenantController {
         tenantService.createNewTenant(tenantDTO);
     }
 
-    @GetMapping()
+    @GetMapping
     public List<TenantDTO> getAllTenants() {
         return tenantService.getAllTenants();
     }
