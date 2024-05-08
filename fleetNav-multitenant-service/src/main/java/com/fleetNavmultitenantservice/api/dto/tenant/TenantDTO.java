@@ -1,0 +1,40 @@
+package com.fleetNavmultitenantservice.api.dto.tenant;
+
+import com.fleetNavmultitenantservice.api.dto.tenant.DataSourceDTO;
+
+public class TenantDTO {
+    private String tenantId;
+    private DataSourceDTO dataSourceDTO;
+
+    public TenantDTO() {
+    }
+
+    public TenantDTO(String tenantId, DataSourceDTO dataSourceDTO) {
+        this.tenantId = tenantId;
+        this.dataSourceDTO = dataSourceDTO;
+    }
+
+    public String getTenantId() {
+        return tenantId;
+    }
+
+    public void setTenantId(String tenantId) {
+        this.tenantId = tenantId;
+    }
+
+    public DataSourceDTO getDataSourceDTO() {
+        return dataSourceDTO;
+    }
+
+    public void setDataSourceDTO(DataSourceDTO dataSourceDTO) {
+        this.dataSourceDTO = dataSourceDTO;
+    }
+
+    @Override
+    public String toString() {
+        return "TenantDTO{" +
+                "tenantId='" + tenantId + '\'' +
+                ", dataSourceDTO=" + dataSourceDTO +
+                '}';
+    }
+}

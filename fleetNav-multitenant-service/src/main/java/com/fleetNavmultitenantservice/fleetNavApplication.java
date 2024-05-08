@@ -1,4 +1,4 @@
-package com.fleetNavmultitenantservice;
+package com.fleetNavmultitenantservice.multitenantservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

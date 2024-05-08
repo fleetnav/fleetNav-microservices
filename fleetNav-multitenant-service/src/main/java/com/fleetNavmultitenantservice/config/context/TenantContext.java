@@ -1,6 +1,6 @@
 package com.fleetNavmultitenantservice.config.context;
 
-import com.fleetNavmultitenantservice.api.dto.TenantDTO;
+import com.fleetNavmultitenantservice.api.dto.tenant.TenantDTO;
 
 public abstract class TenantContext {
     public static final String DEFAULT_TENANT_ID = "public";

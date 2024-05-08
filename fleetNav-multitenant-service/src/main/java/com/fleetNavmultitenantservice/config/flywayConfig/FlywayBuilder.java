@@ -1,7 +1,7 @@
 package com.fleetNavmultitenantservice.config.flywayConfig;
 
-import com.fleetNavmultitenantservice.api.dto.DataSourceDTO;
-import com.fleetNavmultitenantservice.api.dto.TenantDTO;
+import com.fleetNavmultitenantservice.api.dto.tenant.DataSourceDTO;
+import com.fleetNavmultitenantservice.api.dto.tenant.TenantDTO;
 import org.flywaydb.core.Flyway;
 
 import javax.sql.DataSource;

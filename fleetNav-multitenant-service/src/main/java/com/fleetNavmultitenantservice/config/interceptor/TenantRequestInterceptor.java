@@ -1,7 +1,7 @@
 package com.fleetNavmultitenantservice.config.interceptor;
 
 import com.fleetNavmultitenantservice.config.context.TenantContext;
-import com.fleetNavmultitenantservice.infraestructure.services.TenantService;
+import com.fleetNavmultitenantservice.infraestructure.services.tenant.TenantService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;

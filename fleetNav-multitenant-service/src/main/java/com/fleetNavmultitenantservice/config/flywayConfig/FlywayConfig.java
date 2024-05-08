@@ -1,7 +1,7 @@
 package com.fleetNavmultitenantservice.config.flywayConfig;
 
 import com.fleetNavmultitenantservice.config.context.TenantContext;
-import com.fleetNavmultitenantservice.infraestructure.services.TenantService;
+import com.fleetNavmultitenantservice.infraestructure.services.tenant.TenantService;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.flywaydb.core.Flyway;
@@ -11,8 +11,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-
-import javax.sql.DataSource;
 
 import javax.sql.DataSource;
 

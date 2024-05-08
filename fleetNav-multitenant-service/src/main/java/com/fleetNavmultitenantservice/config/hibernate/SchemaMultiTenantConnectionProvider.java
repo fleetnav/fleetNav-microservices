@@ -1,7 +1,7 @@
 package com.fleetNavmultitenantservice.config.hibernate;
 
-import com.fleetNavmultitenantservice.api.dto.DataSourceDTO;
-import com.fleetNavmultitenantservice.api.dto.TenantDTO;
+import com.fleetNavmultitenantservice.api.dto.tenant.DataSourceDTO;
+import com.fleetNavmultitenantservice.api.dto.tenant.TenantDTO;
 import com.fleetNavmultitenantservice.config.context.TenantContext;
 import org.hibernate.engine.jdbc.connections.internal.DriverManagerConnectionProviderImpl;
 import org.hibernate.engine.jdbc.connections.spi.AbstractMultiTenantConnectionProvider;

@@ -1,6 +1,6 @@
 package com.fleetNavmultitenantservice.config.hibernate;
 
-import com.fleetNavmultitenantservice.api.dto.TenantDTO;
+import com.fleetNavmultitenantservice.api.dto.tenant.TenantDTO;
 import com.fleetNavmultitenantservice.config.context.TenantContext;
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.context.annotation.Scope;
