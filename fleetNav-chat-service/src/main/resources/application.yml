@@ -1,6 +1,10 @@
 spring:
   application:
     name: CHAT-SERVICE
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: microservicios  
   config:
     import: optional:configserver:http://localhost:8085
 
