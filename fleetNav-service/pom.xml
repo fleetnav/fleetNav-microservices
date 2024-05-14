@@ -67,6 +67,11 @@
             <version>2.0.3</version>
         </dependency>
 
+<!--        multi-tenancy-->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
         <!-- Dependencies for microservices-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -96,6 +101,7 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>
