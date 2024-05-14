@@ -50,6 +50,7 @@ public class VehicleService implements IVehicleService {
         vehicle.setVehicleStatus(vehicleStatus);
         vehicle.setNextMaintenance(nextMaintenance);
 
+        System.out.println(vehicle.toString());
         Vehicle saveVehicle = vehicleRepository.save(vehicle);
         return vehicleMapper.toVehicleResponse(saveVehicle);
     }

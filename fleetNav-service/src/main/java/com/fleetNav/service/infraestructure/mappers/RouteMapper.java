@@ -15,7 +15,6 @@ public interface RouteMapper {
             @Mapping(source = "costId", target = "cost")
     })
     RouteResponse toRouteResponse(Route route);
-
     @Mapping(target = "id", ignore = true)
     Route toRoute(RouteRequest routeRequest);
 

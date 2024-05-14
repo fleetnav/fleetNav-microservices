@@ -122,6 +122,7 @@ public class RouteController {
     try {
       return ResponseEntity.ok(routeService.update(id, routeRequest));
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }
@@ -176,6 +177,7 @@ public class RouteController {
       if (page != 0) pageable = PageRequest.of(page - 1, size);
       return ResponseEntity.ok(routeService.getAll(pageable));
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }

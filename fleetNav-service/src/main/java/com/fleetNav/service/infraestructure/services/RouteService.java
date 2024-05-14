@@ -7,6 +7,7 @@ import com.fleetNav.service.domain.entities.Cost;
 import com.fleetNav.service.domain.entities.Route;
 import com.fleetNav.service.domain.repositories.CostRepository;
 import com.fleetNav.service.domain.repositories.RouteRepository;
+import com.fleetNav.service.infraestructure.abstract_services.ICostService;
 import com.fleetNav.service.infraestructure.abstract_services.IRouteService;
 import com.fleetNav.service.infraestructure.mappers.RouteMapper;
 import com.fleetNav.service.util.exceptions.IdNotFoundException;
@@ -27,7 +28,7 @@ public class RouteService implements IRouteService {
   private CostRepository costRepository;
 
   @Autowired
-  private CostService costService;
+  private ICostService costService;
 
   @Autowired
   private RouteMapper routeMapper;
@@ -41,6 +42,7 @@ public class RouteService implements IRouteService {
       .orElseThrow(() -> new IdNotFoundException("COST", costResponse.getId()));
 
     route.setCostId(cost);
+    System.out.println("test 1:"+ route.toString() );
     Route saveRoute = routeRepository.save(route);
     return routeMapper.toRouteResponse(saveRoute);
   }

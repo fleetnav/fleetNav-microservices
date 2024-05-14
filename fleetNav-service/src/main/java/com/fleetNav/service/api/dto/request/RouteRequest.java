@@ -1,14 +1,12 @@
 package com.fleetNav.service.api.dto.request;
 
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class RouteRequest {
     private String name;
     private String destination;

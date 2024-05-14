@@ -15,7 +15,6 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)

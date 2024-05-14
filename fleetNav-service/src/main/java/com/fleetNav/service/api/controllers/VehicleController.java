@@ -174,6 +174,7 @@ public class VehicleController {
       if (page != 0) pageable = PageRequest.of(page - 1, size);
       return ResponseEntity.ok(vehicleService.getAll(pageable));
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }

@@ -24,7 +24,9 @@ public class CostService implements ICostService {
 
     @Override
     public CostResponse create(CostRequest costRequest) {
+        System.out.println(costRequest.toString());
         Cost cost = costMapper.toCost(costRequest);
+        System.out.println(cost.toString());
         Cost saveCost = costRepository.save(cost);
         return costMapper.toCostResponse(saveCost);
     }

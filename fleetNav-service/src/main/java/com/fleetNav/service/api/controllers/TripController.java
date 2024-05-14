@@ -56,6 +56,7 @@ public class TripController {
         try {
             return ResponseEntity.ok(tripService.create(tripRequest));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
