@@ -87,7 +87,7 @@ public class TripController {
 
     // --------------------------------------------//
     // *******DELETE*******//
-    @Operation(summary = "Delete Trip by Id", description = "Deletes a Trip object by specifying its id.")
+  /*  @Operation(summary = "Delete Trip by Id", description = "Deletes a Trip object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Trip deleted"),
             @ApiResponse(responseCode = "404", description = "Trip not found")
@@ -104,7 +104,7 @@ public class TripController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-    }
+    }*/
 
     // --------------------------------------------//
     // *******GET-ALL*******//

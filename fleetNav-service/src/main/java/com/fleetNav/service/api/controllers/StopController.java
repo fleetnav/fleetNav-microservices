@@ -129,7 +129,7 @@ public class StopController {
 
   // --------------------------------------------//
   // *******DELETE*******//
- /* @Operation(
+  @Operation(
     summary = "Delete Stop by Id",
     description = "Deletes a Stop object by specifying its id."
   )
@@ -153,7 +153,7 @@ public class StopController {
     } catch (Exception e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-  }*/
+  }
 
   // --------------------------------------------//
   // *******GET-ALL*******//

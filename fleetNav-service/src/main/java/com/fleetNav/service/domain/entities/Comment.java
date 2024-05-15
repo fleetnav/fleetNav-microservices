@@ -27,7 +27,7 @@ public class Comment {
     @Column(nullable = false, length = 30)
     private Double price;
 
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @ManyToOne(cascade = CascadeType.MERGE,fetch = FetchType.EAGER)
     @JoinColumn(name = "trip_id", referencedColumnName = "id")
     private Trip trip;
 }

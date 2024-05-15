@@ -26,7 +26,7 @@ public class Stop {
     @Column(nullable = false, length = 45)
     private String time;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
     @JoinColumn(name = "route_id", referencedColumnName = "id")
     private Route route;
 }

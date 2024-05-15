@@ -130,7 +130,7 @@ public class CommentController {
 
   // --------------------------------------------//
   // *******DELETE*******//
-  @Operation(
+ /* @Operation(
     summary = "Delete Comment by Id",
     description = "Deletes a Comment object by specifying its id."
   )
@@ -154,7 +154,7 @@ public class CommentController {
     } catch (Exception e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-  }
+  }*/
 
   // --------------------------------------------//
   // *******GET-ALL*******//

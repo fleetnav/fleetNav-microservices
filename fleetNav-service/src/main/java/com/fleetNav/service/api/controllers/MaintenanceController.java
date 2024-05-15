@@ -79,6 +79,7 @@ public class MaintenanceController {
         try {
             return ResponseEntity.ok(maintenanceService.update(id, maintenanceRequest));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
