@@ -28,10 +28,10 @@ public class MaintenanceService implements IMaintenanceService {
 
     @Override
     public MaintenanceResponse create(MaintenanceRequest maintenanceRequest) {
+        Maintenance maintenance = maintenanceMapper.toMaintenance(maintenanceRequest);
         Vehicle vehicle = vehicleRepository.findById(maintenanceRequest.getVehicleId())
                 .orElseThrow(() -> new IdNotFoundException("VEHICLE", maintenanceRequest.getVehicleId()));
 
-        Maintenance maintenance = maintenanceMapper.toMaintenance(maintenanceRequest);
         maintenance.setVehicle(vehicle);
         Maintenance saveMaintenance = maintenanceRepository.save(maintenance);
         return maintenanceMapper.toMaintenanceResponse(saveMaintenance);

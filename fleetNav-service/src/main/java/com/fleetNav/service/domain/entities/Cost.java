@@ -10,7 +10,6 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,5 +26,4 @@ public class Cost {
 
     @Column(name = "total_price", nullable = false)
     private Double totalPrice;
-
 }

@@ -6,14 +6,13 @@ import com.fleetNav.service.domain.entities.Maintenance;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
+import org.mapstruct.Mappings;
+import org.mapstruct.factory.Mappers;
 
 import java.util.UUID;
 
-@Mapper(componentModel = "spring", uses = {VehicleMapper.class})
+@Mapper(componentModel = "spring", uses = {MaintenanceMapper.class})
 public interface MaintenanceMapper {
-    default UUID mapTripToUUID(Maintenance maintenance) {
-        return maintenance != null ? maintenance.getId() : null;
-    }
     @Mapping(target = "id", ignore = true)
     Maintenance toMaintenance(MaintenanceRequest maintenanceRequest);
 

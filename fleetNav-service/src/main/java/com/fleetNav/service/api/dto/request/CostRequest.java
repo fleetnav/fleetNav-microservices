@@ -6,7 +6,6 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 public class CostRequest {
     private Integer numberToll;
     private Double priceToll;

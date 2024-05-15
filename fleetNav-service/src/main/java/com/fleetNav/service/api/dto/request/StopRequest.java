@@ -1,9 +1,6 @@
 package com.fleetNav.service.api.dto.request;
 
-import lombok.NoArgsConstructor;
-import lombok.Getter;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.UUID;
 

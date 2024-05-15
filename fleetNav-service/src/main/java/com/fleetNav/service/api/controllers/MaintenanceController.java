@@ -55,6 +55,7 @@ public class MaintenanceController {
         try {
             return ResponseEntity.ok(maintenanceService.create(maintenanceRequest));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
@@ -85,7 +86,7 @@ public class MaintenanceController {
 
     // --------------------------------------------//
     // *******DELETE*******//
-    @Operation(summary = "Delete Maintenance by Id", description = "Deletes a Maintenance object by specifying its id.")
+    /*@Operation(summary = "Delete Maintenance by Id", description = "Deletes a Maintenance object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Maintenance deleted"),
             @ApiResponse(responseCode = "404", description = "Maintenance not found")
@@ -103,7 +104,7 @@ public class MaintenanceController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-    }
+    }*/
 
     // --------------------------------------------//
     // *******GET-ALL*******//

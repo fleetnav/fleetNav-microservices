@@ -122,6 +122,7 @@ public class StopController {
     try {
       return ResponseEntity.ok(stopService.update(id, stopRequest));
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }

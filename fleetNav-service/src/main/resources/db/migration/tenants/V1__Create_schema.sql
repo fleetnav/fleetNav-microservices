@@ -39,7 +39,7 @@ CREATE TABLE vehicle (
     mileage VARCHAR(10) NOT NULL,
     model VARCHAR(4) NOT NULL,
     number_plate VARCHAR(10) NOT NULL,
-    owner_id VARCHAR(45) NOT NULL,
+    owner_id UUID NOT NULL,
     status VARCHAR(45) NOT NULL,
     next_maintenance_id UUID,
     vehicle_status_id UUID,

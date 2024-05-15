@@ -10,7 +10,6 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class Maintenance {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -25,7 +24,7 @@ public class Maintenance {
     @Column(nullable = false, length = 36)
     private Double price;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehicle_id", referencedColumnName = "id")
     private Vehicle vehicle;
 }

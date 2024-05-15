@@ -84,6 +84,7 @@ public class NextMaintenanceController {
             if (page != 0) pageable = PageRequest.of(page - 1, size);
             return ResponseEntity.ok(nextMaintenanceService.getAll(pageable));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 

@@ -11,6 +11,7 @@ import com.fleetNav.service.domain.repositories.StopRepository;
 import com.fleetNav.service.infraestructure.abstract_services.IStopService;
 import com.fleetNav.service.infraestructure.mappers.StopMapper;
 import com.fleetNav.service.util.exceptions.IdNotFoundException;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -26,8 +27,6 @@ public class StopService implements IStopService {
     @Autowired
     private RouteRepository routeRepository;
     @Autowired
-    private RouteService routeService;
-    @Autowired
     private StopMapper stopMapper;
 
     @Override
@@ -42,10 +41,13 @@ public class StopService implements IStopService {
     }
 
     @Override
+    @Transactional
     public StopResponse update(UUID id, StopRequest stopRequest) {
+        System.out.println(id);
         Stop existingStop = stopRepository.findById(id)
                 .orElseThrow(() -> new IdNotFoundException("STOP", id));
-
+        System.out.println(existingStop.toString());
+        System.out.println(stopRequest.toString());
         stopMapper.updateFromStopRequest(stopRequest, existingStop);
         Stop updateStop = stopRepository.save(existingStop);
         return stopMapper.toStopResponse(updateStop);

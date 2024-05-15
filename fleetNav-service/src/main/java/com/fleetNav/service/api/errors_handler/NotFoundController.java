@@ -30,7 +30,7 @@ public class NotFoundController {
     @ExceptionHandler(Exception.class)
     public BaseErrorResponse handleInternalServerError(Exception exception) {
         return ErrorResponse.builder()
-                .message("You probably have the wrong json format or values, or the specified url does not exist.")
+                .message("You probably have the wrong json format or values, or the specified url does not exist. "+exception.getMessage())
                 .status(HttpStatus.NOT_FOUND.name())
                 .code(HttpStatus.NOT_FOUND.value())
                 .build();

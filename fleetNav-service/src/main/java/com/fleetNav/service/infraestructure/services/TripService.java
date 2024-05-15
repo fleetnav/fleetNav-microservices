@@ -13,6 +13,7 @@ import com.fleetNav.service.domain.repositories.VehicleRepository;
 import com.fleetNav.service.infraestructure.abstract_services.ITripService;
 import com.fleetNav.service.infraestructure.mappers.TripMapper;
 import com.fleetNav.service.util.exceptions.IdNotFoundException;
+import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,14 +36,17 @@ public class TripService implements ITripService {
     @Override
     public TripResponse create(TripRequest tripRequest) {
         Trip trip = tripMapper.toTrip(tripRequest);
+        System.out.println(trip.toString());
         Route route = routeRepository.findById(tripRequest.getRouteId())
                 .orElseThrow(() -> new IdNotFoundException("ROUTE", tripRequest.getRouteId()));
+        System.out.println(route.toString());
         Vehicle vehicle = vehicleRepository.findById(tripRequest.getVehicleId())
                 .orElseThrow(() -> new IdNotFoundException("VEHICLE", tripRequest.getVehicleId()));
-
+        System.out.println("Imprimir");
+        System.out.println(vehicle.toString());
         trip.setRoute(route);
         trip.setVehicle(vehicle);
-
+        System.out.println(trip.toString());
         Trip saveTrip = tripRepository.save(trip);
         return tripMapper.toTripResponse(saveTrip);
     }
@@ -65,6 +69,9 @@ public class TripService implements ITripService {
     @Override
     public Page<TripResponse> getAll(Pageable pageable) {
         Page<Trip> tripPage = tripRepository.findAll(pageable);
+        tripPage.forEach(trip -> {
+            Hibernate.initialize(trip.getComments());
+        });
         return tripPage.map(tripMapper::toTripResponse);
     }
 

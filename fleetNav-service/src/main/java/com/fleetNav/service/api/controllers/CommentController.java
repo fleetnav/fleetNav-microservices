@@ -76,6 +76,7 @@ public class CommentController {
     try {
       return ResponseEntity.ok(commentService.create(commentRequest));
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
   }
@@ -122,6 +123,7 @@ public class CommentController {
     try {
       return ResponseEntity.ok(commentService.update(id, commentRequest));
     } catch (Exception e) {
+      System.out.println(e.getMessage());
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
   }

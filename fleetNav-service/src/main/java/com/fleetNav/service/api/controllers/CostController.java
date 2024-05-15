@@ -66,7 +66,7 @@ public class CostController {
 
     // --------------------------------------------//
     // *******DELETE*******//
-    @Operation(summary = "Delete Cost by Id", description = "Deletes a Cost object by specifying its id.")
+    /*@Operation(summary = "Delete Cost by Id", description = "Deletes a Cost object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Cost deleted"),
             @ApiResponse(responseCode = "404", description = "Cost not found")
@@ -82,7 +82,7 @@ public class CostController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
-    }
+    }*/
 
     // --------------------------------------------//
     // *******GET-ALL*******//

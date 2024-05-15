@@ -121,6 +121,7 @@ public class TripController {
                 pageable = PageRequest.of(page - 1, size);
             return ResponseEntity.ok(tripService.getAll(pageable));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
