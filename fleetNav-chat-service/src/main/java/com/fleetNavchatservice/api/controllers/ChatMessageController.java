@@ -16,10 +16,11 @@ import com.fleetNavchatservice.domain.entities.ChatMessage;
 import com.fleetNavchatservice.infraestructure.services.ChatMessageService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+
+@RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
 public class ChatMessageController {
 
   private final SimpMessagingTemplate messagingTemplate;

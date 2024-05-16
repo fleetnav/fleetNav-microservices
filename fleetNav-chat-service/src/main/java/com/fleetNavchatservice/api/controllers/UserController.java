@@ -14,9 +14,10 @@ import com.fleetNavchatservice.domain.entities.User;
 import com.fleetNavchatservice.infraestructure.services.UserService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@CrossOrigin(origins = "*")
+
+@RestController
 @RequiredArgsConstructor
 public class UserController {
 
