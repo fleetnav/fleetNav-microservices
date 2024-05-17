@@ -1,5 +1,6 @@
 package com.fleetNav.service.api.controllers;
 
+import com.fleetNav.service.api.dto.error.ErrorsResponse;
 import com.fleetNav.service.api.dto.request.NextMaintenanceRequest;
 import com.fleetNav.service.api.dto.response.NextMaintenanceResponse;
 
@@ -40,9 +41,12 @@ public class NextMaintenanceController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Next Maintenance successfully update", content = {
                     @Content(schema = @Schema(implementation = NextMaintenanceResponse.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),})
     @PutMapping("/{id}")
     public ResponseEntity<NextMaintenanceResponse> updateNextMaintenance(@Parameter(description = "Id of the Next Maintenance to be update")
                                                                          @PathVariable UUID id,
@@ -79,7 +83,12 @@ public class NextMaintenanceController {
     @Operation(summary = "Get Next Maintenance by Id", description = "Retrieves a Next Maintenance object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Next Maintenance found", content = @Content(schema = @Schema(implementation = NextMaintenanceResponse.class), mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "Next Maintenance not found")
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
     })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<NextMaintenanceResponse>> getNextMaintenance(
