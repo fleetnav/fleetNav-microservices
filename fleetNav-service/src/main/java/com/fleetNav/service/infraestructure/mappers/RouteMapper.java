@@ -1,6 +1,7 @@
 package com.fleetNav.service.infraestructure.mappers;
 
 import com.fleetNav.service.api.dto.request.RouteRequest;
+import com.fleetNav.service.api.dto.request.RouteUpdateRequest;
 import com.fleetNav.service.api.dto.response.RouteResponse;
 import com.fleetNav.service.domain.entities.Route;
 import org.mapstruct.Mapper;
@@ -18,6 +19,6 @@ public interface RouteMapper {
     @Mapping(target = "id", ignore = true)
     Route toRoute(RouteRequest routeRequest);
 
-    void updateFromRouteRequest(RouteRequest routeRequest, @MappingTarget Route route);
+    void updateFromRouteRequest(RouteUpdateRequest routeUpdateRequest, @MappingTarget Route route);
 
 }

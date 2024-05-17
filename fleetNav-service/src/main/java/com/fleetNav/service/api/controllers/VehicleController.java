@@ -1,6 +1,7 @@
 package com.fleetNav.service.api.controllers;
 
 import com.fleetNav.service.api.dto.request.VehicleRequest;
+import com.fleetNav.service.api.dto.request.VehicleUpdateRequest;
 import com.fleetNav.service.api.dto.response.VehicleResponse;
 import com.fleetNav.service.infraestructure.abstract_services.IVehicleService;
 import com.fleetNav.tenant.infrastructure.services.TenantService;
@@ -113,12 +114,12 @@ public class VehicleController {
                     description = "Id of the Vehicle to be update"
             ) @PathVariable UUID id,
             @Validated
-            @RequestBody VehicleRequest vehicleRequest,
+            @RequestBody VehicleUpdateRequest vehicleUpdateRequest,
             @PathVariable String tenant
     ) {
         tenantService.setTenantInContext(tenant);
         try {
-            return ResponseEntity.ok(vehicleService.update(id, vehicleRequest));
+            return ResponseEntity.ok(vehicleService.update(id, vehicleUpdateRequest));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -1,6 +1,7 @@
 package com.fleetNav.service.infraestructure.services;
 
 import com.fleetNav.service.api.dto.request.RouteRequest;
+import com.fleetNav.service.api.dto.request.RouteUpdateRequest;
 import com.fleetNav.service.api.dto.response.CostResponse;
 import com.fleetNav.service.api.dto.response.RouteResponse;
 import com.fleetNav.service.domain.entities.Cost;
@@ -48,16 +49,6 @@ public class RouteService implements IRouteService {
   }
 
   @Override
-  public RouteResponse update(UUID uuid, RouteRequest routeRequest) {
-    Route existingRoute = routeRepository
-      .findById(uuid)
-      .orElseThrow(() -> new IdNotFoundException("ROUTE", uuid));
-    routeMapper.updateFromRouteRequest(routeRequest, existingRoute);
-    Route updateRoute = routeRepository.save(existingRoute);
-    return routeMapper.toRouteResponse(updateRoute);
-  }
-
-  @Override
   public void delete(UUID uuid) {
     routeRepository.deleteById(uuid);
   }
@@ -73,5 +64,15 @@ public class RouteService implements IRouteService {
     Optional<Route> route = routeRepository.findById(uuid);
     if (route.isEmpty()) throw new IdNotFoundException("ROUTE", uuid);
     return route.map(routeMapper::toRouteResponse);
+  }
+
+  @Override
+  public RouteResponse update(UUID uuid, RouteUpdateRequest routeUpdateRequest) {
+    Route existingRoute = routeRepository
+            .findById(uuid)
+            .orElseThrow(() -> new IdNotFoundException("ROUTE", uuid));
+    routeMapper.updateFromRouteRequest(routeUpdateRequest, existingRoute);
+    Route updateRoute = routeRepository.save(existingRoute);
+    return routeMapper.toRouteResponse(updateRoute);
   }
 }

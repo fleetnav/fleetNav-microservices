@@ -1,6 +1,7 @@
 package com.fleetNav.service.api.controllers;
 
 import com.fleetNav.service.api.dto.request.RouteRequest;
+import com.fleetNav.service.api.dto.request.RouteUpdateRequest;
 import com.fleetNav.service.api.dto.response.RouteResponse;
 import com.fleetNav.service.infraestructure.abstract_services.IRouteService;
 import com.fleetNav.tenant.infrastructure.services.TenantService;
@@ -115,12 +116,12 @@ public class RouteController {
                     description = "Id of the Route to be update"
             ) @PathVariable UUID id,
             @Validated
-            @RequestBody RouteRequest routeRequest,
+            @RequestBody RouteUpdateRequest routeUpdateRequest,
             @PathVariable String tenant
     ) {
         tenantService.setTenantInContext(tenant);
         try {
-            return ResponseEntity.ok(routeService.update(id, routeRequest));
+            return ResponseEntity.ok(routeService.update(id, routeUpdateRequest));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

@@ -6,10 +6,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.Optional;
 
 
-public interface CrudService<Request, Response, Id> {
+public interface CreateReadDeleteService<Request, Response, Id> {
     Response create(Request request);
-
-    Response update(Id id, Request request);
 
     void delete(Id id);
 
