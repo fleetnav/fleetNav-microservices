@@ -1,5 +1,6 @@
 package com.fleetNav.service.api.dto.response;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -16,14 +17,8 @@ import lombok.Setter;
 public class CommentResponse {
 
     private UUID id;
-
-    private String date;
-
+    private LocalDate date;
     private String observation;
-
     private Double price;
 }
-/*
- * Is not necessary show trip id, because if you're watching this comment is
- * because you had already filtered
- */
+

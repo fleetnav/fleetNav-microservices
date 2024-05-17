@@ -5,15 +5,17 @@ import com.fleetNav.service.api.dto.error.ErrorResponse;
 import com.fleetNav.service.api.dto.error.ErrorsResponse;
 import com.fleetNav.service.util.exceptions.IdNotFoundException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@RestControllerAdvice
+    @RestControllerAdvice
 @ResponseStatus(code = HttpStatus.NOT_FOUND)
 public class NotFoundController {
 
@@ -27,23 +29,10 @@ public class NotFoundController {
                 .build();
     }
 
-    @ExceptionHandler(Exception.class)
+    @ExceptionHandler(NoHandlerFoundException.class)
     public BaseErrorResponse handleInternalServerError(Exception exception) {
         return ErrorResponse.builder()
-                .message("You probably have the wrong json format or values, or the specified url does not exist. "+exception.getMessage())
-                .status(HttpStatus.NOT_FOUND.name())
-                .code(HttpStatus.NOT_FOUND.value())
-                .build();
-    }
-
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public BaseErrorResponse handleErrors(MethodArgumentNotValidException exception) {
-        List<String> errors = new ArrayList<>();
-
-        exception.getAllErrors().forEach(error -> errors.add(error.getDefaultMessage()));
-
-        return ErrorsResponse.builder()
-                .errors(errors)
+                .message("Check your url. "+exception.getMessage())
                 .status(HttpStatus.NOT_FOUND.name())
                 .code(HttpStatus.NOT_FOUND.value())
                 .build();
