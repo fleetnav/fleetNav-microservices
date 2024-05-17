@@ -1,15 +1,17 @@
 package com.fleetNav.service.api.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class RouteRequest {
+public class RouteUpdateRequest {
     @NotBlank(message = "Name is required")
     @Size(
             max = 45,
@@ -40,6 +42,4 @@ public class RouteRequest {
             message = "Mileage cannot be longer than 10 characters."
     )
     private String mileage;
-    @NotNull(message = "Cost is required")
-    private CostRequest cost;
 }

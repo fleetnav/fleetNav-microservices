@@ -4,9 +4,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.NoArgsConstructor;
-import lombok.Getter;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.UUID;
@@ -15,7 +15,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class VehicleRequest {
+public class VehicleUpdateRequest {
     @NotBlank(message = "mileage must not be null")
     @Size(
             max = 10,
@@ -41,8 +41,4 @@ public class VehicleRequest {
     @NotBlank(message = "Status must not be null")
     @Pattern(regexp = "ON_TRIP|OFF_TRIP|ON_MAINTENANCE", message = "The state must be ON_TRIP, OFF_TRIP or ON_MAINTENANCE")
     private String status;
-    @NotNull(message = "Next maintenance must not be null")
-    private NextMaintenanceRequest nextMaintenance;
-    @NotNull(message = "Vehicle status must not be null")
-    private VehicleStatusRequest vehicleStatus;
 }

@@ -6,5 +6,5 @@ import com.fleetNav.service.api.dto.response.CommentResponse;
 import java.util.UUID;
 
 
-public interface ICommentService extends CrudService<CommentRequest, CommentResponse, UUID> {
+public interface ICommentService extends CreateReadDeleteService<CommentRequest, CommentResponse, UUID>, UpdateService<CommentRequest, CommentResponse, UUID> {
 }

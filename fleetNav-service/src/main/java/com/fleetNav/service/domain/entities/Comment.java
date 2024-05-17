@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -19,7 +20,7 @@ public class Comment {
     private UUID id;
 
     @Column(nullable = false, length = 30)
-    private String date;
+    private LocalDate date;
 
     @Column(nullable = false, length = 200)
     private String observation;

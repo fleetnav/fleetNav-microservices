@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -34,14 +35,6 @@ public class NextMaintenanceController {
     private final INextMaintenanceService nextMaintenanceService;
     @Autowired
     private TenantService tenantService;
-    // We don't need http request, because this action is called for vehicle
-    /*@PostMapping
-    public ResponseEntity<NextMaintenanceResponse> saveNextMaintenance(@RequestBody NextMaintenanceRequest nextMaintenanceRequest) {
-        return ResponseEntity.ok(nextMaintenanceService.create(nextMaintenanceRequest));
-    }*/
-
-    // --------------------------------------------//
-    // *******UPDATE*******//
 
     @Operation(summary = "Update a next maintenance", description = "updates an existing next maintenance in the database")
     @ApiResponses({
@@ -53,6 +46,7 @@ public class NextMaintenanceController {
     @PutMapping("/{id}")
     public ResponseEntity<NextMaintenanceResponse> updateNextMaintenance(@Parameter(description = "Id of the Next Maintenance to be update")
                                                                          @PathVariable UUID id,
+                                                                         @Validated
                                                                          @RequestBody NextMaintenanceRequest nextMaintenanceRequest,
                                                                          @PathVariable String tenant
     ) {
@@ -64,14 +58,6 @@ public class NextMaintenanceController {
         }
     }
 
-    // Just exist one way to delete the next maintenance, and this is deleting the vehicle
-    /*@DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteNextMaintenance(@PathVariable UUID id) {
-        nextMaintenanceService.delete(id);
-        return ResponseEntity.noContent().build();
-    }*/
-    // --------------------------------------------//
-    // *******GET-ALL*******//
     @Operation(summary = "Get all next maintenances", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<NextMaintenanceResponse>> getAllNextMaintenances(
@@ -89,8 +75,6 @@ public class NextMaintenanceController {
         }
 
     }
-    // --------------------------------------------//
-    // *******GET-BY-ID*******//
 
     @Operation(summary = "Get Next Maintenance by Id", description = "Retrieves a Next Maintenance object by specifying its id.")
     @ApiResponses(value = {

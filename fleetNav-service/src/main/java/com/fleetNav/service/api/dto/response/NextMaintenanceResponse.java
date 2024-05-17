@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -15,7 +16,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class NextMaintenanceResponse {
     private UUID id;
-    private String date;
+    private LocalDate date;
     private String hour;
     private String location;
 }

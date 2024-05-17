@@ -12,6 +12,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 
@@ -26,7 +27,7 @@ public class NextMaintenance {
     private UUID id;
 
     @Column(nullable = false, length = 30)
-    private String date;
+    private LocalDate date;
 
     @Column(nullable = false, length = 10)
     private String hour;

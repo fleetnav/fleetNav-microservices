@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -36,13 +37,6 @@ public class CostController {
 
     @Autowired
     private TenantService tenantService;
-    //We don't need http request, because this action is called for route
-    /*@PostMapping
-    public ResponseEntity<CostResponse> saveCost(@RequestBody CostRequest costRequest) {
-        return ResponseEntity.ok(costService.create(costRequest));
-    }*/
-    // --------------------------------------------//
-    // *******UPDATE*******//
 
     @Operation(summary = "Update a cost", description = "updates an existing cost in the database")
     @ApiResponses({
@@ -54,6 +48,7 @@ public class CostController {
     @PutMapping("/{id}")
     public ResponseEntity<CostResponse> updateCost(
             @Parameter(description = "Id of the Cost to be update") @PathVariable UUID id,
+            @Validated
             @RequestBody CostRequest costRequest,
             @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
@@ -64,28 +59,6 @@ public class CostController {
         }
     }
 
-    // --------------------------------------------//
-    // *******DELETE*******//
-    /*@Operation(summary = "Delete Cost by Id", description = "Deletes a Cost object by specifying its id.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Cost deleted"),
-            @ApiResponse(responseCode = "404", description = "Cost not found")
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCost(
-            @Parameter(description = "Id of the Cost to be deleted") @PathVariable UUID id, @PathVariable String tenant) {
-        tenantService.setTenantInContext(tenant);
-        try {
-            costService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }*/
-
-    // --------------------------------------------//
-    // *******GET-ALL*******//
     @Operation(summary = "Get all Cost", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<CostResponse>> getAllCosts(@Parameter(description = "Page number ") @RequestParam(defaultValue = "0") int page,
@@ -101,8 +74,6 @@ public class CostController {
         }
 
     }
-    // --------------------------------------------//
-    // *******GET-BY-ID*******//
 
     @Operation(summary = "Get Cost by Id", description = "Retrieves a Cost object by specifying its id.")
     @ApiResponses(value = {

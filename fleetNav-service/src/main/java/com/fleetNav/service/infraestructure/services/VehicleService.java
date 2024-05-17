@@ -1,6 +1,7 @@
 package com.fleetNav.service.infraestructure.services;
 
 import com.fleetNav.service.api.dto.request.VehicleRequest;
+import com.fleetNav.service.api.dto.request.VehicleUpdateRequest;
 import com.fleetNav.service.api.dto.response.NextMaintenanceResponse;
 import com.fleetNav.service.api.dto.response.VehicleResponse;
 import com.fleetNav.service.api.dto.response.VehicleStatusResponse;
@@ -56,16 +57,6 @@ public class VehicleService implements IVehicleService {
     }
 
     @Override
-    public VehicleResponse update(UUID id, VehicleRequest vehicleRequest) {
-        Vehicle existingVehicle = vehicleRepository.findById(id)
-                .orElseThrow(() -> new IdNotFoundException("VEHICLE", id));
-
-        vehicleMapper.updateFromVehicleRequest(vehicleRequest, existingVehicle);
-        Vehicle updateVehicle = vehicleRepository.save(existingVehicle);
-        return vehicleMapper.toVehicleResponse(updateVehicle);
-    }
-
-    @Override
     public void delete(UUID uuid) {
         vehicleRepository.deleteById(uuid);
     }
@@ -81,5 +72,15 @@ public class VehicleService implements IVehicleService {
         Optional<Vehicle> vehicle = vehicleRepository.findById(uuid);
         if (vehicle.isEmpty()) throw new IdNotFoundException("VEHICLE", uuid);
         return vehicle.map(vehicleMapper::toVehicleResponse);
+    }
+
+    @Override
+    public VehicleResponse update(UUID uuid, VehicleUpdateRequest vehicleUpdateRequest) {
+        Vehicle existingVehicle = vehicleRepository.findById(uuid)
+                .orElseThrow(() -> new IdNotFoundException("VEHICLE", uuid));
+
+        vehicleMapper.updateFromVehicleRequest(vehicleUpdateRequest, existingVehicle);
+        Vehicle updateVehicle = vehicleRepository.save(existingVehicle);
+        return vehicleMapper.toVehicleResponse(updateVehicle);
     }
 }

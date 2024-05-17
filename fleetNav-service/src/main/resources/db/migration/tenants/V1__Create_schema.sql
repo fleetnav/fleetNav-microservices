@@ -28,7 +28,7 @@ TABLESPACE pg_default;
 
 CREATE TABLE next_maintenance (
     id UUID PRIMARY KEY,
-    date VARCHAR(30) NOT NULL,
+    date DATE NOT NULL,
     hour VARCHAR(10) NOT NULL,
     location VARCHAR(45) NOT NULL
 )WITH (OIDS = FALSE)
@@ -50,7 +50,7 @@ TABLESPACE pg_default;
 
 CREATE TABLE maintenance (
     id UUID PRIMARY KEY,
-    date VARCHAR(30) NOT NULL,
+    date DATE NOT NULL,
     observation VARCHAR(200) NOT NULL,
     price DOUBLE PRECISION NOT NULL,
     vehicle_id UUID,
@@ -71,8 +71,8 @@ TABLESPACE pg_default;
 CREATE TABLE trip (
     id UUID PRIMARY KEY,
     cost DOUBLE PRECISION NOT NULL,
-    date_end VARCHAR(30) NOT NULL,
-    date_start VARCHAR(30) NOT NULL,
+    date_end DATE NOT NULL,
+    date_start DATE NOT NULL,
     driver_id UUID NOT NULL,
     route_id UUID,
     vehicle_id UUID,
@@ -83,7 +83,7 @@ TABLESPACE pg_default;
 
 CREATE TABLE comment (
     id UUID PRIMARY KEY,
-    date VARCHAR(30) NOT NULL,
+    date DATE NOT NULL,
     observation VARCHAR(200) NOT NULL,
     price DOUBLE PRECISION  NOT NULL,
     trip_id UUID,

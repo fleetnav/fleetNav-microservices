@@ -5,5 +5,5 @@ import com.fleetNav.service.api.dto.response.NextMaintenanceResponse;
 
 import java.util.UUID;
 
-public interface INextMaintenanceService extends CrudService<NextMaintenanceRequest, NextMaintenanceResponse, UUID> {
+public interface INextMaintenanceService extends CreateReadDeleteService<NextMaintenanceRequest, NextMaintenanceResponse, UUID>,UpdateService<NextMaintenanceRequest, NextMaintenanceResponse, UUID> {
 }

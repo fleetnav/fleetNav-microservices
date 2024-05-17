@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -36,8 +37,6 @@ public class TripController {
     @Autowired
     private TenantService tenantService;
 
-    //--------------------------------------------//
-    //*******SAVE*******//
     @Operation(
             summary = "Save a Trip",
             description = "Saves a new Trip in the database."
@@ -50,8 +49,10 @@ public class TripController {
 
 
     @PostMapping
-    public ResponseEntity<TripResponse> saveTrip(@RequestBody TripRequest tripRequest,
-                                                 @PathVariable String tenant) {
+    public ResponseEntity<TripResponse> saveTrip(
+            @Validated
+            @RequestBody TripRequest tripRequest,
+            @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
         try {
             return ResponseEntity.ok(tripService.create(tripRequest));
@@ -61,8 +62,6 @@ public class TripController {
         }
 
     }
-    // --------------------------------------------//
-    // *******UPDATE*******//
 
     @Operation(summary = "Update a Trip", description = "updates an existing Trip in the database")
     @ApiResponses({
@@ -74,6 +73,7 @@ public class TripController {
     @PutMapping("/{id}")
     public ResponseEntity<TripResponse> updateTrip(
             @Parameter(description = "Id of the Trip to be update") @PathVariable UUID id,
+            @Validated
             @RequestBody TripRequest tripRequest,
             @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
@@ -85,29 +85,6 @@ public class TripController {
 
     }
 
-    // --------------------------------------------//
-    // *******DELETE*******//
-  /*  @Operation(summary = "Delete Trip by Id", description = "Deletes a Trip object by specifying its id.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Trip deleted"),
-            @ApiResponse(responseCode = "404", description = "Trip not found")
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteTrip(
-            @Parameter(description = "Id of the Trip to be deleted") @PathVariable UUID id,
-            @PathVariable String tenant) {
-        tenantService.setTenantInContext(tenant);
-        try {
-            tripService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }*/
-
-    // --------------------------------------------//
-    // *******GET-ALL*******//
     @Operation(summary = "Get all Trips", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<TripResponse>> getAllTrips(
@@ -126,8 +103,6 @@ public class TripController {
         }
 
     }
-    // --------------------------------------------//
-    // *******GET-BY-ID*******//
 
     @Operation(summary = "Get Trip by Id", description = "Retrieves a Trip object by specifying its id.")
     @ApiResponses(value = {

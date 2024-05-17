@@ -3,6 +3,7 @@ package com.fleetNav.service.domain.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -16,7 +17,7 @@ public class Maintenance {
     private UUID id;
 
     @Column(nullable = false, length = 30)
-    private String date;
+    private LocalDate date;
 
     @Column(nullable = false, length = 200)
     private String observation;

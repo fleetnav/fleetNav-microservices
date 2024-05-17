@@ -21,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -37,8 +38,6 @@ public class MaintenanceController {
     @Autowired
     private TenantService tenantService;
 
-    //--------------------------------------------//
-    //*******SAVE*******//
     @Operation(
             summary = "Save a maintenance",
             description = "Saves a new maintenance in the database."
@@ -49,7 +48,7 @@ public class MaintenanceController {
             @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {@Content(schema = @Schema())}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PostMapping
-    public ResponseEntity<MaintenanceResponse> saveMaintenance(@RequestBody MaintenanceRequest maintenanceRequest,
+    public ResponseEntity<MaintenanceResponse> saveMaintenance(@Validated @RequestBody MaintenanceRequest maintenanceRequest,
                                                                @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
         try {
@@ -60,8 +59,6 @@ public class MaintenanceController {
         }
 
     }
-    // --------------------------------------------//
-    // *******UPDATE*******//
 
     @Operation(summary = "Update a maintenance", description = "updates an existing maintenance in the database")
     @ApiResponses({
@@ -73,6 +70,7 @@ public class MaintenanceController {
     @PutMapping("/{id}")
     public ResponseEntity<MaintenanceResponse> updateMaintenance(@Parameter(description = "Id of the Maintenance to be update")
                                                                  @PathVariable UUID id,
+                                                                 @Validated
                                                                  @RequestBody MaintenanceRequest maintenanceRequest,
                                                                  @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
@@ -85,30 +83,6 @@ public class MaintenanceController {
 
     }
 
-    // --------------------------------------------//
-    // *******DELETE*******//
-    /*@Operation(summary = "Delete Maintenance by Id", description = "Deletes a Maintenance object by specifying its id.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "204", description = "Maintenance deleted"),
-            @ApiResponse(responseCode = "404", description = "Maintenance not found")
-    })
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMaintenance(
-            @Parameter(description = "Id of the Maintenance to be deleted")
-            @PathVariable UUID id,
-            @PathVariable String tenant) {
-        tenantService.setTenantInContext(tenant);
-        try {
-            maintenanceService.delete(id);
-            return ResponseEntity.noContent().build();
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-    }*/
-
-    // --------------------------------------------//
-    // *******GET-ALL*******//
     @Operation(summary = "Get all Maintenances", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<MaintenanceResponse>> getAllMaintenances(
@@ -124,8 +98,6 @@ public class MaintenanceController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
-    // --------------------------------------------//
-    // *******GET-BY-ID*******//
 
     @Operation(summary = "Get Maintenance by Id", description = "Retrieves a Maintenance object by specifying its id.")
     @ApiResponses(value = {

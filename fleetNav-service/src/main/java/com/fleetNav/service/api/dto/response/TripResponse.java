@@ -1,5 +1,6 @@
 package com.fleetNav.service.api.dto.response;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -15,8 +16,8 @@ import lombok.Setter;
 public class TripResponse {
     private UUID id;
     private UUID driverId;
-    private String dateStart;
-    private String dateEnd;
+    private LocalDate dateStart;
+    private LocalDate dateEnd;
     private Double cost;
     private List<CommentResponse> comments;
     private RouteResponse route;

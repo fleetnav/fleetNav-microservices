@@ -1,6 +1,7 @@
 package com.fleetNav.service.domain.entities;
 
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -23,10 +24,10 @@ public class Trip {
     private UUID driverId;
 
     @Column(name = "date_start", nullable = false, length = 30)
-    private String dateStart;
+    private LocalDate dateStart;
 
     @Column(name = "date_end", nullable = false, length = 30)
-    private String dateEnd;
+    private LocalDate dateEnd;
 
     @Column(nullable = false)
     private Double cost;

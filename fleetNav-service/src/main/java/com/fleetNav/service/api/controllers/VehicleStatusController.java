@@ -20,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -31,19 +32,8 @@ import java.util.UUID;
 public class VehicleStatusController {
     @Autowired
     private IVehicleStatusService vehicleStatusService;
-
     @Autowired
     private TenantService tenantService;
-    // We don't need http request, because this action is called for vehicle
-    /*
-     * @PostMapping
-     * public ResponseEntity<VehicleStatusResponse> saveVehicleStatus(@RequestBody
-     * VehicleStatusRequest vehicleStatusRequest) {
-     * return ResponseEntity.ok(vehicleStatusService.create(vehicleStatusRequest));
-     * }
-     */
-    // --------------------------------------------//
-    // *******UPDATE*******//
 
     @Operation(summary = "Update a vehicle status", description = "updates an existing vehicle status in the database")
     @ApiResponses({
@@ -53,9 +43,11 @@ public class VehicleStatusController {
                     @Content(schema = @Schema())}),
             @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
     @PutMapping("/{id}")
-    public ResponseEntity<VehicleStatusResponse> updateVehicleStatus(@Parameter(description = "Id of the Vehicle Status to be update") @PathVariable UUID id,
-                                                                     @RequestBody VehicleStatusRequest vehicleStatusRequest,
-                                                                     @PathVariable String tenant) {
+    public ResponseEntity<VehicleStatusResponse> updateVehicleStatus(
+            @Parameter(description = "Id of the Vehicle Status to be update") @PathVariable UUID id,
+            @Validated
+            @RequestBody VehicleStatusRequest vehicleStatusRequest,
+            @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
         try {
             return ResponseEntity.ok(vehicleStatusService.update(id, vehicleStatusRequest));
@@ -65,16 +57,6 @@ public class VehicleStatusController {
 
     }
 
-    // for delete a vehicle status is required delete the car first
-    /*
-     * @DeleteMapping("/{id}")
-     * public ResponseEntity<Void> deleteVehicleStatus(@PathVariable UUID id) {
-     * vehicleStatusService.delete(id);
-     * return ResponseEntity.noContent().build();
-     * }
-     */
-    // --------------------------------------------//
-    // *******GET-ALL*******//
     @Operation(summary = "Get all Status of Vehicles", description = "Retrieves a list of all tutorials with pagination support.")
     @GetMapping
     public ResponseEntity<Page<VehicleStatusResponse>> getAllVehicleStatus(
@@ -92,8 +74,6 @@ public class VehicleStatusController {
         }
 
     }
-    // --------------------------------------------//
-    // *******GET-BY-ID*******//
 
     @Operation(summary = "Get Vehicle Status by Id", description = "Retrieves a Vehicle Status object by specifying its id.")
     @ApiResponses(value = {

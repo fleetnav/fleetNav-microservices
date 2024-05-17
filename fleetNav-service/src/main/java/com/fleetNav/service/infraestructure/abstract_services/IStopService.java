@@ -5,5 +5,5 @@ import com.fleetNav.service.api.dto.response.StopResponse;
 
 import java.util.UUID;
 
-public interface IStopService extends CrudService<StopRequest, StopResponse, UUID> {
+public interface IStopService extends CreateReadDeleteService<StopRequest, StopResponse, UUID>,UpdateService<StopRequest, StopResponse, UUID> {
 }
