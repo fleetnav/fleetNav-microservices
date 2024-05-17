@@ -1,5 +1,6 @@
 package com.fleetNav.service.api.controllers;
 
+import com.fleetNav.service.api.dto.error.ErrorsResponse;
 import com.fleetNav.service.api.dto.request.VehicleStatusRequest;
 import com.fleetNav.service.api.dto.response.VehicleStatusResponse;
 
@@ -39,9 +40,12 @@ public class VehicleStatusController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Vehicle Status successfully update", content = {
                     @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "404", description = "Petition not found", content = {
-                    @Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+           @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),})
     @PutMapping("/{id}")
     public ResponseEntity<VehicleStatusResponse> updateVehicleStatus(
             @Parameter(description = "Id of the Vehicle Status to be update") @PathVariable UUID id,
@@ -78,7 +82,12 @@ public class VehicleStatusController {
     @Operation(summary = "Get Vehicle Status by Id", description = "Retrieves a Vehicle Status object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Vehicle Status found", content = @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "Vehicle Status not found")
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
     })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<VehicleStatusResponse>> getVehicleStatus(

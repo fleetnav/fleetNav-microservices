@@ -1,5 +1,6 @@
 package com.fleetNav.service.api.controllers;
 
+import com.fleetNav.service.api.dto.error.ErrorsResponse;
 import com.fleetNav.service.api.dto.request.MaintenanceRequest;
 import com.fleetNav.service.api.dto.response.MaintenanceResponse;
 
@@ -38,18 +39,20 @@ public class MaintenanceController {
     @Autowired
     private TenantService tenantService;
 
-    @Operation(
-            summary = "Save a maintenance",
-            description = "Saves a new maintenance in the database."
-    )
+    @Operation(summary = "Save a maintenance", description = "Saves a new maintenance in the database.")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Maintenance successfully saved", content = {
-                    @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {@Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+                    @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+    })
     @PostMapping
-    public ResponseEntity<MaintenanceResponse> saveMaintenance(@Validated @RequestBody MaintenanceRequest maintenanceRequest,
-                                                               @PathVariable String tenant) {
+    public ResponseEntity<MaintenanceResponse> saveMaintenance(
+            @Validated @RequestBody MaintenanceRequest maintenanceRequest,
+            @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
         try {
             return ResponseEntity.ok(maintenanceService.create(maintenanceRequest));
@@ -63,16 +66,18 @@ public class MaintenanceController {
     @Operation(summary = "Update a maintenance", description = "updates an existing maintenance in the database")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Maintenance successfully update", content = {
-                    @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+                    @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json") }),
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }), })
     @PutMapping("/{id}")
-    public ResponseEntity<MaintenanceResponse> updateMaintenance(@Parameter(description = "Id of the Maintenance to be update")
-                                                                 @PathVariable UUID id,
-                                                                 @Validated
-                                                                 @RequestBody MaintenanceRequest maintenanceRequest,
-                                                                 @PathVariable String tenant) {
+    public ResponseEntity<MaintenanceResponse> updateMaintenance(
+            @Parameter(description = "Id of the Maintenance to be update") @PathVariable UUID id,
+            @Validated @RequestBody MaintenanceRequest maintenanceRequest,
+            @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
         try {
             return ResponseEntity.ok(maintenanceService.update(id, maintenanceRequest));
@@ -92,7 +97,8 @@ public class MaintenanceController {
         tenantService.setTenantInContext(tenant);
         try {
             Pageable pageable = PageRequest.of(page, size);
-            if (page != 0) pageable = PageRequest.of(page - 1, size);
+            if (page != 0)
+                pageable = PageRequest.of(page - 1, size);
             return ResponseEntity.ok(maintenanceService.getAll(pageable));
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -102,12 +108,16 @@ public class MaintenanceController {
     @Operation(summary = "Get Maintenance by Id", description = "Retrieves a Maintenance object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Maintenance found", content = @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "Maintenance not found")
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
     })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<MaintenanceResponse>> getMaintenance(
-            @Parameter(description = "id of the Maintenance to be get")
-            @PathVariable UUID id,
+            @Parameter(description = "id of the Maintenance to be get") @PathVariable UUID id,
             @PathVariable String tenant) {
         tenantService.setTenantInContext(tenant);
         try {
