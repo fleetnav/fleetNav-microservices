@@ -1,5 +1,6 @@
 package com.fleetNav.service.api.controllers;
 
+import com.fleetNav.service.api.dto.error.ErrorsResponse;
 import com.fleetNav.service.api.dto.request.CostRequest;
 import com.fleetNav.service.api.dto.response.CostResponse;
 import com.fleetNav.service.infraestructure.abstract_services.ICostService;
@@ -42,9 +43,14 @@ public class CostController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Cost successfully update", content = {
                     @Content(schema = @Schema(implementation = CostResponse.class), mediaType = "application/json")}),
-            @ApiResponse(responseCode = "404", description = "Peticion no encontrada", content = {
-                    @Content(schema = @Schema())}),
-            @ApiResponse(responseCode = "500", content = {@Content(schema = @Schema())})})
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+        
+        })
     @PutMapping("/{id}")
     public ResponseEntity<CostResponse> updateCost(
             @Parameter(description = "Id of the Cost to be update") @PathVariable UUID id,
@@ -78,7 +84,12 @@ public class CostController {
     @Operation(summary = "Get Cost by Id", description = "Retrieves a Cost object by specifying its id.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Cost found", content = @Content(schema = @Schema(implementation = CostResponse.class), mediaType = "application/json")),
-            @ApiResponse(responseCode = "404", description = "Cost not found")
+            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
+            @ApiResponse(responseCode = "500", description = "Error : Internal server error", content = {
+                    @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
     })
     @GetMapping("/{id}")
     public ResponseEntity<Optional<CostResponse>> getCost(
