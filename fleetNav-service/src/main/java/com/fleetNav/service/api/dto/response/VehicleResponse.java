@@ -20,7 +20,6 @@ public class VehicleResponse {
     private String mileage;
     private String model;
     private String numberPlate;
-    private UUID ownerId;
     private String status;
     private NextMaintenanceResponse nextMaintenance;
     private VehicleStatusResponse vehicleStatus;

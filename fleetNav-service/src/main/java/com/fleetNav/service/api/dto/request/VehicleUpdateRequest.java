@@ -19,25 +19,23 @@ public class VehicleUpdateRequest {
     @NotBlank(message = "mileage must not be null")
     @Size(
             max = 10,
-            message = "El teléfono debe tener entre 10 y 20 caracteres"
+            message = "Mileage cannot be longer than 10 characters."
     )
     private String mileage;
     @NotBlank(message = "model must not be null")
     @Size(
             min = 4,
             max = 4,
-            message = "El teléfono debe tener entre 10 y 20 caracteres"
+            message = "Model cannot be longer than 4 characters."
     )
     private String model;
     @NotBlank(message = "Number plate must not be null")
     @Size(
             min = 6,
             max = 6,
-            message = "El teléfono debe tener entre 10 y 20 caracteres"
+            message = "Number plate cannot be longer than 6 characters."
     )
     private String numberPlate;
-    @NotNull(message = "Owner id must not be null")
-    private UUID ownerId;
     @NotBlank(message = "Status must not be null")
     @Pattern(regexp = "ON_TRIP|OFF_TRIP|ON_MAINTENANCE", message = "The state must be ON_TRIP, OFF_TRIP or ON_MAINTENANCE")
     private String status;
