@@ -9,7 +9,7 @@ TABLESPACE pg_default;
 
 CREATE TABLE vehicle_status (
     id UUID PRIMARY KEY,
-    driver_id UUID NOT NULL,
+    driver_id VARCHAR(32) NOT NULL,
     observation VARCHAR(200) NOT NULL
 )WITH (OIDS = FALSE)
 TABLESPACE pg_default;
@@ -39,7 +39,6 @@ CREATE TABLE vehicle (
     mileage VARCHAR(10) NOT NULL,
     model VARCHAR(4) NOT NULL,
     number_plate VARCHAR(10) NOT NULL,
-    owner_id UUID NOT NULL,
     status VARCHAR(45) NOT NULL,
     next_maintenance_id UUID,
     vehicle_status_id UUID,
@@ -70,10 +69,12 @@ TABLESPACE pg_default;
 
 CREATE TABLE trip (
     id UUID PRIMARY KEY,
-    cost DOUBLE PRECISION NOT NULL,
+    owner_earning DOUBLE PRECISION NOT NULL,
+    driver_earning DOUBLE PRECISION NOT NULL,
+    status VARCHAR(45) NOT NULL,
     date_end DATE NOT NULL,
     date_start DATE NOT NULL,
-    driver_id UUID NOT NULL,
+    driver_id VARCHAR(32),
     route_id UUID,
     vehicle_id UUID,
     CONSTRAINT fk_route_id_trip FOREIGN KEY (route_id) REFERENCES route(id),
@@ -102,3 +103,6 @@ ALTER TABLE vehicle OWNER TO postgres;
 ALTER TABLE vehicle_status OWNER TO postgres;
 
 CREATE SEQUENCE hibernate_sequence START 1;
+
+
+

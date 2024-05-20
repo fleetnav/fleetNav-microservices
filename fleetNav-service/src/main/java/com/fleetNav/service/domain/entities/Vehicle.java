@@ -33,9 +33,6 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleStatusEnum status;
 
-    @Column(length = 45, nullable = false)
-    private UUID ownerId;
-
     @OneToMany(mappedBy = "vehicle", cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     private List<Trip> trips;
 

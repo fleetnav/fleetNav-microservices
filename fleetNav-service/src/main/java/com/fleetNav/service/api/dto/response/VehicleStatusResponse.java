@@ -14,5 +14,5 @@ public class VehicleStatusResponse {
 
   private UUID id;
   private String observation;
-  private UUID driverId;
+  private String driverId;
 }

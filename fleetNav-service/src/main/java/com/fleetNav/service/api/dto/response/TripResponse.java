@@ -15,10 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class TripResponse {
     private UUID id;
-    private UUID driverId;
+    private String driverId;
     private LocalDate dateStart;
     private LocalDate dateEnd;
-    private Double cost;
+    private Double driverEarning;
+    private Double ownerEarning;
+    private String status;
     private List<CommentResponse> comments;
     private RouteResponse route;
     private VehicleResponse vehicle;

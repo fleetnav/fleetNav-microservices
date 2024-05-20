@@ -21,6 +21,10 @@ public class VehicleStatusRequest {
             message = "Observation cannot be longer than 200 characters."
     )
     private String observation;
-    @NotNull(message = "Diver id is required")
-    private UUID driverId;
+    @NotBlank(message = "Driver id is required")
+    @Size(
+            max = 32,
+            message = "Driver id cannot be longer than 32 characters."
+    )
+    private String driverId;
 }

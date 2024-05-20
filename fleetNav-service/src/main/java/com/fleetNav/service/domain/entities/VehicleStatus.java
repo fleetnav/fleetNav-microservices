@@ -27,5 +27,5 @@ public class VehicleStatus {
     private String observation;
 
     @Column(name = "driver_id", nullable = false, length = 36)
-    private UUID driverId;
+    private String driverId;
 }
