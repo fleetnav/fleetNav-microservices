@@ -10,4 +10,4 @@ WITH (
 TABLESPACE pg_default;
 
 ALTER TABLE tenant
-    OWNER to postgres;
+    OWNER to ralexale;

@@ -92,15 +92,15 @@ CREATE TABLE comment (
 )WITH (OIDS = FALSE)
 TABLESPACE pg_default;
 
-ALTER TABLE comment OWNER TO postgres;
-ALTER TABLE cost OWNER TO postgres;
-ALTER TABLE maintenance OWNER TO postgres;
-ALTER TABLE next_maintenance OWNER TO postgres;
-ALTER TABLE route OWNER TO postgres;
-ALTER TABLE stop OWNER TO postgres;
-ALTER TABLE trip OWNER TO postgres;
-ALTER TABLE vehicle OWNER TO postgres;
-ALTER TABLE vehicle_status OWNER TO postgres;
+ALTER TABLE comment OWNER TO ralexale;
+ALTER TABLE cost OWNER TO ralexale;
+ALTER TABLE maintenance OWNER TO ralexale;
+ALTER TABLE next_maintenance OWNER TO ralexale;
+ALTER TABLE route OWNER TO ralexale;
+ALTER TABLE stop OWNER TO ralexale;
+ALTER TABLE trip OWNER TO ralexale;
+ALTER TABLE vehicle OWNER TO ralexale;
+ALTER TABLE vehicle_status OWNER TO ralexale;
 
 CREATE SEQUENCE hibernate_sequence START 1;
 

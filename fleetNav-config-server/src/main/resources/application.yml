@@ -1,13 +1,22 @@
 server:
-  port: 8085
+    port: 8085
 
 spring:
-  application:
-    name: CONFIG-SERVER
+    application:
+        name: CONFIG-SERVER
 
-  cloud:
-    config:
-      server:
-        git:
-          uri: https://github.com/fleetnav/fleetNav-config
-          clone-on-start: true
+    cloud:
+        config:
+            server:
+                git:
+                    uri: https://github.com/fleetnav/fleetNav-config
+                    clone-on-start: true
+
+eureka:
+    client:
+        serviceUrl:
+            defaultZone: https://fleetnav-eureka-server-0-0-1.onrender.com/eureka
+        fetch-registry: true
+        register-with-eureka: true
+    instance:
+        prefer-ip-address: true
