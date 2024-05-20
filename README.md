@@ -1,4 +1,4 @@
-# Tattion
+# FleetNav
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 <p align="center">
@@ -13,6 +13,7 @@ FleetNav is an application designed to enable fleet owners to efficiently manage
 - **Trip Information**: Track trips taken by each vehicle.
 - **Driver Management**: Drivers can log in to their account to view their work information and assignments.
 - **Vehicle Information**: Details on the operational status and maintenance of vehicles.
+- **Chat**: Online chat between users
 
 ## Installation
 
@@ -26,15 +27,12 @@ Follow these steps to install and run the Tattion project in your local developm
 ```bash
 git clone https://github.com/fleetnav/fleetNav-microservices.git
 ```
-2. Navigate to 
+2. Init Docker
 ```bash
 docker-compose up --build
 ```
-3. Install the dependencies using pnpm:
-```bash
-pnpm install
-```
-4. Run the project in development mode:
+
+3. Run the project in development mode:
 
 ```bash
 mvn clean install
@@ -80,5 +78,5 @@ We appreciate contributions to Tattion! If you would like to contribute to the p
 
 ## Authors
 
-*Juan Pablo Regino* <img align='center' src="https://media.giphy.com/media/12oufCB0MyZ1Go/giphy.gif" width="50"></img>   *Sebastian Moreno* <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbGpvcXE2bTFwZjZvbmdjaGt5YXQ5eGg3cTVncGY3a3kzYXUwd2xrdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/WoFUgVGgalRNitKbof/giphy.gif" width="50" align='center'>  *Hector Montaña* <img src="https://media.giphy.com/media/BHCFcibksBxAV0FDoL/giphy.gif" width="50" align='center' /> 
+*Juan Pablo Regino* <img align='center' src="https://media.giphy.com/media/12oufCB0MyZ1Go/giphy.gif" width="50"></img>   *Sebastian Moreno* <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnppb3EwNGU0NWY2bG1zYWJiNGtrMDdjejMzcWM3c2dzaWs2b2l2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xRJinOH44eOd2/giphy.gif" width="50" align='center'>  *Hector Montaña* <img src="https://media.giphy.com/media/BHCFcibksBxAV0FDoL/giphy.gif" width="50" align='center' /> 
 
