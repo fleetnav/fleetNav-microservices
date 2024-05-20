@@ -18,7 +18,7 @@ FleetNav is an application designed to enable fleet owners to efficiently manage
 ## Installation
 
 Follow these steps to install and run the Tattion project in your local development environment:
-### Prerrequisitos
+### Prerequisites
 
 - Java 17
 - Docker
