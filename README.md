@@ -46,6 +46,8 @@ mvn clean install
 - multitenant-service: http://localhost:8089/api/v1
 - chat service: http://localhost:8083/socket/v1
 
+## Documentation
+The documentation can be found in the [wiki](https://github.com/fleetnav/fleetNav-microservices/wiki)
 
 ## Deploy
 - Eureka-server: https://fleetnav-eureka-server-0-0-1.onrender.com
