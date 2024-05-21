@@ -1,3 +1,4 @@
+
 # FleetNav
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -87,4 +88,3 @@ We appreciate contributions to Tattion! If you would like to contribute to the p
 ## Authors
 
 *Juan Pablo Regino* <img align='center' src="https://media.giphy.com/media/12oufCB0MyZ1Go/giphy.gif" width="50"></img>   *Sebastian Moreno* <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnppb3EwNGU0NWY2bG1zYWJiNGtrMDdjejMzcWM3c2dzaWs2b2l2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xRJinOH44eOd2/giphy.gif" width="50" height= "35" align='center'>  *Hector Montaña* <img src="https://media.giphy.com/media/BHCFcibksBxAV0FDoL/giphy.gif" width="50" align='center' /> 
-
