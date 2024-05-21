@@ -1,6 +1,5 @@
 spring:
-  application:
-    name: CHAT-SERVICE
-  config:
-    import: optional:configserver:http://localhost:8085
-
+    application:
+        name: CHAT-SERVICE
+    config:
+        import: optional:configserver:http://localhost:8085

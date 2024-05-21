@@ -1,115 +1,90 @@
-# fleetNav
-date: 26/4/2024
-created for
 
-Hector Montaña
-Juan Pablo Regino
-Sebastián Moreno
-Julián Roman
-Camila
-1. Introduction
-1.1 Purpose
-The purpose of this document is to define the requirements and scope of the project to develop a management tool for bus owners and drivers. The application will allow owners to manage their buses, drivers, and routes, and facilitate communication between owners and drivers through an integrated chat system.
+# FleetNav
 
-1.2 Scope
-The scope of the project includes developing a web application with a backend divided into three microservices and a frontend built using React and Next.js. Owners will be able to register buses, drivers, and routes, view financial and operational information through a dashboard, and communicate with drivers via an integrated chat system. Drivers will access information on earnings, available routes, and communicate with owners through the chat system.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<p align="center">
+<img align="center" width="400px" src="https://res.cloudinary.com/dxzuncdy9/image/upload/v1716248060/x3unl8usuopidem6gusq.png">
+</p>
 
-1.3 Definitions, Acronyms, and Abbreviations
-Backend: The part of the system responsible for data processing, storage, and business logic.
-Frontend: The part of the system that interacts with the end-user.
-Microservices: An architectural approach to software development where an application is divided into independent and autonomous services.
-Dashboard: A user interface that provides a summarized view of relevant information.
-API: Application Programming Interface, used to enable communication between different software components.
-NoSQL: Non-relational database management system like MongoDB.
-WebSocket: A bidirectional communication protocol between a web browser and a web server.
-PostgreSQL: An open-source relational database management system.
-JWT: JSON Web Token, a standard for securely transmitting information between parties as a JSON object.
-CSS: Cascading Style Sheets, a graphic design language for defining the look and formatting of a document written in a markup language.
-REST API: A type of API that follows the principles of Representational State Transfer architecture.
-React: A JavaScript library for building user interfaces.
-Next.js: A React framework that enables server-side rendering and generation of static websites for web applications.
-TypeScript: A superset of JavaScript that adds optional static typing to the language.
-Tailwind CSS: A low-level utility CSS framework that provides pre-defined classes for designing user interfaces.
-Framer Motion: An animation library for React.
-Mapbox: An online mapping platform.
-1.4 References
-Nest.js Documentation: https://nestjs.com/
-Spring Framework Documentation: https://spring.io/
-PostgreSQL Documentation: https://www.postgresql.org/docs/
-MongoDB Documentation: https://docs.mongodb.com/
-React Documentation: https://reactjs.org/docs/getting-started.html
-Next.js Documentation: https://nextjs.org/docs
-Mapbox Documentation: https://docs.mapbox.com/
-Zustand Documentation: https://zustand.surge.sh/
-Multitenancy Architecture Documentation: https://www.ibm.com/cloud/learn/multitenancy
-2. General Description
-2.1 Product Perspective
-The management tool for bus owners and drivers will be a web application providing an intuitive and user-friendly interface for owners to manage their buses, drivers, and routes, and for drivers to access relevant information about earnings and available routes.
+FleetNav is an application designed to enable fleet owners to efficiently manage their vehicles and drivers. The application provides a view for fleet owners, where they can monitor the status of their vehicles, as well as a view for drivers, where they can see their personal and work information.
 
-2.2 Product Functions
-The main functions of the product will include:
+## Features
 
-User registration and authentication for owners and drivers.
-Registration and management of buses, drivers, and routes by owners.
-Display of financial and operational information through a dashboard for owners.
-Communication between owners and drivers through an integrated chat system.
-Display of financial and operational information for drivers, including earnings and available routes.
-2.3 Users and Characteristics
-Bus Owners
-Bus owners will have access to the following features:
+- **Fleet Management**: Owners can view and manage the status of all their vehicles.
+- **Trip Information**: Track trips taken by each vehicle.
+- **Driver Management**: Drivers can log in to their account to view their work information and assignments.
+- **Vehicle Information**: Details on the operational status and maintenance of vehicles.
+- **Chat**: Online chat between users
 
-Registration and management of buses, drivers, and routes.
-Display of detailed information through a dashboard.
-Communication with drivers via the integrated chat system.
-User profile configuration.
-Drivers
-Drivers will have access to the following features:
+## Installation
 
-Display of earnings and available routes.
-Communication with owners via the integrated chat system.
-User profile configuration.
-3. Specific Requirements
-3.1 Functional Requirements
-User Authentication:
+Follow these steps to install and run the Tattion project in your local development environment:
+### Prerequisites
 
-Users should be able to register and log in to the application.
-Authentication credentials provided by users must be validated.
-Registration and Management of Buses, Drivers, and Routes:
+- Java 17
+- Docker
 
-Owners should be able to register and manage information about their buses, drivers, and routes via application forms.
-Ensure accuracy and completeness of registered information.
-Dashboard for Owners:
+1. Clone the repository:
+```bash
+git clone https://github.com/fleetnav/fleetNav-microservices.git
+```
+2. Init Docker
+```bash
+docker-compose up --build
+```
 
-Provide a dashboard displaying detailed information on earnings, expenses, and other relevant metrics for owners.
-The dashboard should be interactive, allowing owners to perform actions like viewing specific details and generating reports.
-Communication between Owners and Drivers:
+3. Run the project in development mode:
 
-Implement a chat system that enables bidirectional communication between owners and drivers.
-Owners and drivers should be able to view message history and send new messages.
-3.2 Non-Functional Requirements
-Security:
+```bash
+mvn clean install
+```
+## Open
+**Local**
+- Eureka-server: http://localhost:8761/
+- config server: http://localhost:8085
+- api gateway: http://localhost:8088
+- multitenant-service: http://localhost:8089/api/v1
+- chat service: http://localhost:8083/socket/v1
 
-Implement a secure authentication and authorization system to protect users' confidential information.
-Apply best security practices to prevent vulnerabilities such as SQL injection attacks and denial-of-service attacks.
-Performance:
 
-The application must be capable of handling a large volume of users and simultaneous transactions without significantly slow response times.
-Optimize database queries and frontend performance to ensure a smooth user experience.
-3.3 Interface Requirements
-Intuitive User Interface:
-The user interface should be intuitive and easy to use for both owners and drivers, with clear navigation and understandable visual elements.
-Use responsive design elements to ensure a consistent experience across different devices and screen sizes.
-3.4 Performance Requirements
-Scalability:
-The application architecture should be scalable to accommodate future growth in the number of users and data volume.
-Implement measures to ensure that application performance does not significantly degrade under increased load.
-3.5 Design Constraints
-Browser Compatibility:
-The application must be compatible with a wide range of modern web browsers, including Chrome, Firefox, Safari, and Edge.
-Conduct comprehensive compatibility testing to ensure the application functions correctly on different browsers and versions.
+## Deploy
+- Eureka-server: https://fleetnav-eureka-server-0-0-1.onrender.com
+- config server: https://fleetnav-config-server-0-0-2.onrender.com
+- api gateway: https://fleetnav-api-gateway-0-0-2.onrender.com
+- multitenant-service: https://fleetnav-multitenant-service-0-0-3.onrender.com
+- chat-service: https://fleetnav-chat-service-0-0-3.onrender.com
 
-# Diagrams
+## This project was developed with:
 
-![Here is the image of the flowchart of the application.](https://res.cloudinary.com/dxdkd2q9d/image/upload/v1715030858/diagrama_general_kpnb2f.jpg)
-![Here is the image of the application database diagram.](https://res.cloudinary.com/dxdkd2q9d/image/upload/v1715030857/base_de_datos_cxm5ll.jpg)
+- ![Static Badge](https://img.shields.io/badge/Spring-%236DB33F?logo=spring&logoColor=white)
+- ![Static Badge](https://img.shields.io/badge/Docker-%232496ED?logo=docker&logoColor=white)
+ 
+- ![Static Badge](https://img.shields.io/badge/PostgreSQL-%234169E1?logo=postgresql&logoColor=white)
 
+- ![Static Badge](https://img.shields.io/badge/Spring%20Security%20-%20%236DB33F?logo=springSecurity&logoColor=white)
+
+- ![Static Badge](https://img.shields.io/badge/Spring%20Boot%20-%20%236DB33F?logo=springBoot&logoColor=white)
+- ![Static Badge](https://img.shields.io/badge/Render-%2346E3B7?logo=render&logoColor=white)
+
+
+
+
+
+# Contribution
+We appreciate contributions to Tattion! If you would like to contribute to the project, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your feature or bug fix: ```git checkout -b feature/my-new-feature or git checkout -b bugfix/my-fix.```
+3. Make your changes and commit the files: ```git commit -m 'Add my new feature'.```
+4. Push the created branch: ```git push origin feature/my-new-feature.```
+5. Open a Pull Request on GitHub.
+6. Make sure to follow our contribution guidelines and respect the project's code of conduct.
+
+# Contact
+- *Juan Pablo Regino* - *juanregino@gmail.com*
+- *Sebastian Moreno* - *Sebastianmorenoecheverri@gmail.com*
+- *Hector Montaña* - *ralexale@gmail.com*
+
+## Authors
+
+*Juan Pablo Regino* <img align='center' src="https://media.giphy.com/media/12oufCB0MyZ1Go/giphy.gif" width="50"></img>   *Sebastian Moreno* <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYnppb3EwNGU0NWY2bG1zYWJiNGtrMDdjejMzcWM3c2dzaWs2b2l2ayZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/xRJinOH44eOd2/giphy.gif" width="50" height= "35" align='center'>  *Hector Montaña* <img src="https://media.giphy.com/media/BHCFcibksBxAV0FDoL/giphy.gif" width="50" align='center' /> 
