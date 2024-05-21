@@ -39,7 +39,7 @@ public class NextMaintenanceController {
 
     @Operation(summary = "Update a next maintenance", description = "updates an existing next maintenance in the database")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Next Maintenance successfully update", content = {
+            @ApiResponse(responseCode = "201", description = "Next Maintenance successfully update", content = {
                     @Content(schema = @Schema(implementation = NextMaintenanceResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -82,7 +82,7 @@ public class NextMaintenanceController {
 
     @Operation(summary = "Get Next Maintenance by Id", description = "Retrieves a Next Maintenance object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Next Maintenance found", content = @Content(schema = @Schema(implementation = NextMaintenanceResponse.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "Next Maintenance found", content = @Content(schema = @Schema(implementation = NextMaintenanceResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
             @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {

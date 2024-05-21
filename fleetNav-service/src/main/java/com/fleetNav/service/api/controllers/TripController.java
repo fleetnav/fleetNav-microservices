@@ -40,7 +40,7 @@ public class TripController {
 
     @Operation(summary = "Save a Trip", description = "Saves a new Trip in the database.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Trip successfully saved", content = {
+            @ApiResponse(responseCode = "201", description = "Trip successfully saved", content = {
                     @Content(schema = @Schema(implementation = TripResponse.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -64,7 +64,7 @@ public class TripController {
 
     @Operation(summary = "Update a Trip", description = "updates an existing Trip in the database")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Trip successfully update", content = {
+            @ApiResponse(responseCode = "201", description = "Trip successfully update", content = {
                     @Content(schema = @Schema(implementation = TripResponse.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -107,7 +107,7 @@ public class TripController {
 
     @Operation(summary = "Get Trip by Id", description = "Retrieves a Trip object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Trip found", content = @Content(schema = @Schema(implementation = TripResponse.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "Trip found", content = @Content(schema = @Schema(implementation = TripResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
             @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {

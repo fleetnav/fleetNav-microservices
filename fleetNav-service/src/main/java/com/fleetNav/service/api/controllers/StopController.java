@@ -40,7 +40,7 @@ public class StopController {
 
         @Operation(summary = "Save a Stop", description = "Saves a new Stopt in the database.")
         @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Stop successfully saved", content = {
+                        @ApiResponse(responseCode = "201", description = "Stop successfully saved", content = {
                                         @Content(schema = @Schema(implementation = StopResponse.class), mediaType = "application/json"),
                         }),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
@@ -64,7 +64,7 @@ public class StopController {
 
         @Operation(summary = "Update a Stopt", description = "updates an existing Stopt in the database")
         @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Stop successfully update", content = {
+                        @ApiResponse(responseCode = "201", description = "Stop successfully update", content = {
                                         @Content(schema = @Schema(implementation = StopResponse.class), mediaType = "application/json"),
                         }),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
@@ -130,7 +130,7 @@ public class StopController {
 
         @Operation(summary = "Get Stop by Id", description = "Retrieves a Stop object by specifying its id.")
         @ApiResponses(value = {
-                        @ApiResponse(responseCode = "200", description = "Stop found", content = @Content(schema = @Schema(implementation = StopResponse.class), mediaType = "application/json")),
+                        @ApiResponse(responseCode = "201", description = "Stop found", content = @Content(schema = @Schema(implementation = StopResponse.class), mediaType = "application/json")),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                                         @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
                         @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {

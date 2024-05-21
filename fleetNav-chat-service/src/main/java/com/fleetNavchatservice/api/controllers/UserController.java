@@ -34,7 +34,7 @@ public class UserController {
         description = "Add a new user and publish it to all subscribers."
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "User successfully added",
+        @ApiResponse(responseCode = "201", description = "User successfully added",
             content = @Content(schema = @Schema(implementation = User.class))),
         @ApiResponse(responseCode = "400", description = "Invalid user data")
     })
@@ -48,7 +48,7 @@ public class UserController {
 
   @Operation(summary = "Disconnect user", description = "Disconnect a user and publish it to all subscribers.")
   @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "User successfully disconnected", content = @Content(schema = @Schema(implementation = User.class))),
+      @ApiResponse(responseCode = "201", description = "User successfully disconnected", content = @Content(schema = @Schema(implementation = User.class))),
       @ApiResponse(responseCode = "400", description = "Invalid user data")
   })
   @MessageMapping("/user.disconnectUser")
@@ -63,7 +63,7 @@ public class UserController {
         description = "Retrieves a list of all connected users."
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Connected users successfully recovered",
+        @ApiResponse(responseCode = "201", description = "Connected users successfully recovered",
             content = @Content(array = @ArraySchema(schema = @Schema(implementation = User.class)))),
         @ApiResponse(responseCode = "500", description = "Internal server error")
     })

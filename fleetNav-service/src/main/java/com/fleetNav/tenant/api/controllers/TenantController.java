@@ -28,7 +28,7 @@ public class TenantController {
 
     @Operation(summary = "Save a tenant", description = "Saves a new tenant in the database.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Tenant successfully saved", content = {
+            @ApiResponse(responseCode = "201", description = "Tenant successfully saved", content = {
                     @Content(schema = @Schema(implementation = TenantDTO.class), mediaType = "application/json"),
             }),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
