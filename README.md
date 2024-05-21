@@ -47,7 +47,9 @@ mvn clean install
 - chat service: http://localhost:8083/socket/v1
 
 ## Documentation
-The documentation can be found in the [wiki](https://github.com/fleetnav/fleetNav-microservices/wiki)
+- The task board can be found at [ClickUp](https://app.clickup.com/9017158559/v/li/901702386888)
+- The endPoint can be found in [Swagger](https://fleetnav-multitenant-service-0-0-3.onrender.com/api/v1/swagger-ui/index.html#/)
+- The documentation can be found in the [wiki](https://github.com/fleetnav/fleetNav-microservices/wiki)
 
 ## Deploy
 - Eureka-server: https://fleetnav-eureka-server-0-0-1.onrender.com
