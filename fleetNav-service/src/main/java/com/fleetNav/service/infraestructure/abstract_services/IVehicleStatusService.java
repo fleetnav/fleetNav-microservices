@@ -5,5 +5,5 @@ import com.fleetNav.service.api.dto.response.VehicleStatusResponse;
 
 import java.util.UUID;
 
-public interface IVehicleStatusService extends CreateReadDeleteService<VehicleStatusRequest, VehicleStatusResponse, UUID>,UpdateService<VehicleStatusRequest, VehicleStatusResponse, UUID> {
+public interface IVehicleStatusService extends CRUDService<VehicleStatusRequest, VehicleStatusResponse, UUID>,UpdateService<VehicleStatusRequest, VehicleStatusResponse, UUID> {
 }

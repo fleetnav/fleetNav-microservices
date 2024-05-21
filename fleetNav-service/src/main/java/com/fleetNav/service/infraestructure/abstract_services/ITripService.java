@@ -5,5 +5,5 @@ import com.fleetNav.service.api.dto.response.TripResponse;
 
 import java.util.UUID;
 
-public interface ITripService extends CreateReadDeleteService<TripRequest, TripResponse, UUID>, UpdateService<TripRequest, TripResponse, UUID> {
+public interface ITripService extends CRUDService<TripRequest, TripResponse, UUID>, UpdateService<TripRequest, TripResponse, UUID> {
 }
