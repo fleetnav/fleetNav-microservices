@@ -41,7 +41,7 @@ public class CostController {
 
     @Operation(summary = "Update a cost", description = "updates an existing cost in the database")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Cost successfully update", content = {
+            @ApiResponse(responseCode = "201", description = "Cost successfully update", content = {
                     @Content(schema = @Schema(implementation = CostResponse.class), mediaType = "application/json")}),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -83,7 +83,7 @@ public class CostController {
 
     @Operation(summary = "Get Cost by Id", description = "Retrieves a Cost object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Cost found", content = @Content(schema = @Schema(implementation = CostResponse.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "Cost found", content = @Content(schema = @Schema(implementation = CostResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
             @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {

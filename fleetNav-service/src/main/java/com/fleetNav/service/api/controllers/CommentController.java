@@ -41,7 +41,7 @@ public class CommentController {
 
         @Operation(summary = "Save a comment", description = "Saves a new comment in the database.")
         @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Comment successfully saved", content = {
+                        @ApiResponse(responseCode = "201", description = "Comment successfully saved", content = {
                                         @Content(schema = @Schema(implementation = CommentResponse.class), mediaType = "application/json"),
                         }),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
@@ -66,7 +66,7 @@ public class CommentController {
 
         @Operation(summary = "Update a comment", description = "updates an existing comment in the database")
         @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Comment successfully update", content = {
+                        @ApiResponse(responseCode = "201", description = "Comment successfully update", content = {
                                         @Content(schema = @Schema(implementation = CommentResponse.class), mediaType = "application/json"),
                         }),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
@@ -109,7 +109,7 @@ public class CommentController {
 
         @Operation(summary = "Get Comment by Id", description = "Retrieves a Comment object by specifying its id.")
         @ApiResponses(value = {
-                        @ApiResponse(responseCode = "200", description = "Comment found", content = @Content(schema = @Schema(implementation = CommentResponse.class), mediaType = "application/json")),
+                        @ApiResponse(responseCode = "201", description = "Comment found", content = @Content(schema = @Schema(implementation = CommentResponse.class), mediaType = "application/json")),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                                         @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
                         

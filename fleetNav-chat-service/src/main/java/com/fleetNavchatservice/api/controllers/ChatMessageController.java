@@ -36,7 +36,7 @@ public class ChatMessageController {
 
   @Operation(summary = "Send message", description = "Sends a message to all users connected to the chat.")
   @ApiResponses(value = {
-      @ApiResponse(responseCode = "200", description = "Message sent successfully"),
+      @ApiResponse(responseCode = "201", description = "Message sent successfully"),
       @ApiResponse(responseCode = "400", description = "Invalid message data")
   })
   @MessageMapping("/chat")
@@ -55,7 +55,7 @@ public class ChatMessageController {
         description = "Retrieves all chat messages between two specific users."
     )
     @ApiResponses(value = {
-        @ApiResponse(responseCode = "200", description = "Messages successfully retrieved",
+        @ApiResponse(responseCode = "201", description = "Messages successfully retrieved",
             content = @Content(array = @ArraySchema(schema = @Schema(implementation = ChatMessage.class)))),
         @ApiResponse(responseCode = "404", description = "Messages not found")
     })

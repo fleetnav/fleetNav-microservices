@@ -38,7 +38,7 @@ public class VehicleStatusController {
 
     @Operation(summary = "Update a vehicle status", description = "updates an existing vehicle status in the database")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Vehicle Status successfully update", content = {
+            @ApiResponse(responseCode = "201", description = "Vehicle Status successfully update", content = {
                     @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")}),
            @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -81,7 +81,7 @@ public class VehicleStatusController {
 
     @Operation(summary = "Get Vehicle Status by Id", description = "Retrieves a Vehicle Status object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Vehicle Status found", content = @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "Vehicle Status found", content = @Content(schema = @Schema(implementation = VehicleStatusResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
             @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {

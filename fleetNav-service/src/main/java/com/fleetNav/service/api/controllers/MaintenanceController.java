@@ -41,7 +41,7 @@ public class MaintenanceController {
 
     @Operation(summary = "Save a maintenance", description = "Saves a new maintenance in the database.")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Maintenance successfully saved", content = {
+            @ApiResponse(responseCode = "201", description = "Maintenance successfully saved", content = {
                     @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -65,7 +65,7 @@ public class MaintenanceController {
 
     @Operation(summary = "Update a maintenance", description = "updates an existing maintenance in the database")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Maintenance successfully update", content = {
+            @ApiResponse(responseCode = "201", description = "Maintenance successfully update", content = {
                     @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json") }),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
@@ -107,7 +107,7 @@ public class MaintenanceController {
 
     @Operation(summary = "Get Maintenance by Id", description = "Retrieves a Maintenance object by specifying its id.")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Maintenance found", content = @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json")),
+            @ApiResponse(responseCode = "201", description = "Maintenance found", content = @Content(schema = @Schema(implementation = MaintenanceResponse.class), mediaType = "application/json")),
             @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                     @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
             @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {

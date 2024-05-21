@@ -41,7 +41,7 @@ public class RouteController {
 
         @Operation(summary = "Save a Route", description = "Saves a new Route in the database.")
         @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Route successfully saved", content = {
+                        @ApiResponse(responseCode = "201", description = "Route successfully saved", content = {
                                         @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json"),
                         }),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
@@ -65,7 +65,7 @@ public class RouteController {
 
         @Operation(summary = "Update a Route", description = "updates an existing Route in the database")
         @ApiResponses({
-                        @ApiResponse(responseCode = "200", description = "Route successfully update", content = {
+                        @ApiResponse(responseCode = "201", description = "Route successfully update", content = {
                                         @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json"),
                         }),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
@@ -132,7 +132,7 @@ public class RouteController {
 
         @Operation(summary = "Get Route by Id", description = "Retrieves a Route object by specifying its id.")
         @ApiResponses(value = {
-                        @ApiResponse(responseCode = "200", description = "Route found", content = @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json")),
+                        @ApiResponse(responseCode = "201", description = "Route found", content = @Content(schema = @Schema(implementation = RouteResponse.class), mediaType = "application/json")),
                         @ApiResponse(responseCode = "400", description = "Error : Invalid Request", content = {
                                         @Content(schema = @Schema(implementation = ErrorsResponse.class)) }),
                         @ApiResponse(responseCode = "404", description = "Error : Id not found", content = {
