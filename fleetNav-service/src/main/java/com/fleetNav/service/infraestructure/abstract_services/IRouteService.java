@@ -6,5 +6,5 @@ import com.fleetNav.service.api.dto.response.RouteResponse;
 
 import java.util.UUID;
 
-public interface IRouteService extends CreateReadDeleteService<RouteRequest, RouteResponse, UUID>, UpdateService<RouteUpdateRequest, RouteResponse, UUID> {
+public interface IRouteService extends CRUDService<RouteRequest, RouteResponse, UUID>, UpdateService<RouteUpdateRequest, RouteResponse, UUID> {
 }

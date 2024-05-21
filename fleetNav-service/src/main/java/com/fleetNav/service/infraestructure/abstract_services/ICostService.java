@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface ICostService extends CreateReadDeleteService<CostRequest, CostResponse, UUID>, UpdateService<CostRequest, CostResponse, UUID> {
+public interface ICostService extends CRUDService<CostRequest, CostResponse, UUID>, UpdateService<CostRequest, CostResponse, UUID> {
 }
