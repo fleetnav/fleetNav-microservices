@@ -30,7 +30,7 @@ git clone https://github.com/fleetnav/fleetNav-microservices.git
 ```
 2. Init Docker
 ```bash
-docker-compose up --build
+docker-compose up -d
 ```
 
 3. Run the project in development mode:
