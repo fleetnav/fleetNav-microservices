@@ -82,6 +82,16 @@ After initializing Docker, follow these steps to start each microservice in the 
 - FleetNav Service: [http://localhost:8089/api/v1](http://localhost:8089/api/v1)
 - Chat Service: [http://localhost:8083/socket/v1](http://localhost:8083/socket/v1)
 
+## For testing endpoints use api gateway port
+   - Multitenant service http://localhost:8088/api/v1/
+   - chat service http://localhost:8088/socket/scoket/v1
+
+
+## Documentation
+- The task board can be found at [ClickUp](https://app.clickup.com/9017158559/v/li/901702386888)
+- The endPoint can be found in [Swagger](http://localhost:8088/api/v1/swagger-ui/index.html#/)
+- The documentation can be found in the [wiki](https://github.com/fleetnav/fleetNav-microservices/wiki)
+
 ## Deploy
 
 - Eureka-server: [https://fleetnav-eureka-server-0-0-1.onrender.com](https://fleetnav-eureka-server-0-0-1.onrender.com)
