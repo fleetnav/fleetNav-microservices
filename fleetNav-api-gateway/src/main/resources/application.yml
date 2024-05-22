@@ -2,5 +2,5 @@ spring:
   application:
     name: API-GATEWAY
   config:
-    import: optional:configserver:https://fleetnav-config-server-0-0-2.onrender.com/
-    #import: optional:configserver:http://localhost:8085
+    #import: optional:configserver:https://fleetnav-config-server-0-0-2.onrender.com/
+    import: optional:configserver:http://localhost:8085
