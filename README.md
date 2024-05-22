@@ -25,14 +25,15 @@ Follow these steps to install and run the FleetNav project in your local develop
 - Docker
 
 1. Clone the repository:
-    ```bash
-    git clone https://github.com/fleetnav/fleetNav-microservices.git
-    ```
 
-2. Initialize Docker:
-    ```bash
-    docker-compose up --build
-    ```
+```bash
+git clone https://github.com/fleetnav/fleetNav-microservices.git
+```
+2. Init Docker
+```bash
+docker-compose up -d
+```
+
 
 3. Run the project in development mode:
     ```bash
@@ -75,12 +76,14 @@ After initializing Docker, follow these steps to start each microservice in the 
 
 ## Open
 
+
 **Local**
 - Eureka-server: [http://localhost:8761/](http://localhost:8761/)
 - Config Server: [http://localhost:8085](http://localhost:8085)
 - API Gateway: [http://localhost:8088](http://localhost:8088)
 - FleetNav Service: [http://localhost:8089/api/v1](http://localhost:8089/api/v1)
 - Chat Service: [http://localhost:8083/socket/v1](http://localhost:8083/socket/v1)
+
 
 ## Deploy
 
